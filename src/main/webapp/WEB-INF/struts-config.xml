@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    <form-beans>
+        <form-bean name="loginForm" type="com.my_app.login.LoginForm"></form-bean>
+    </form-beans>
+
+    <global-forwards>
+        <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/home" type="com.my_app.home.HomeAction" scope="request"></action>
+
+        <action name="loginForm" path="/login" type="com.my_app.login.LoginAction" scope="request">
+            <forward name="login" path="/login.jsp" />
+        </action>
+    </action-mappings>
+</struts-config>
