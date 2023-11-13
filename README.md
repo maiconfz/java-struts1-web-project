@@ -1,1 +1,1 @@
-# java-struts1-web-project
+# java7-struts1-jquery-bootstrap3-web-project
