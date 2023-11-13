@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="html" uri="http://jakarta.apache.org/struts/tags-html-1.0.2" %>
-<%@ taglib prefix="bean" uri="http://jakarta.apache.org/struts/tags-bean-1.0.2" %>
+<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
+<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +50,6 @@
                 </div>
                 <div style="padding-top: 30px" class="panel-body">
                     <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                    <bean:message key="error.common.required"/>
                     <form id="loginform" class="form-horizontal" action="${contextPath}/login.do" method="POST">
                         <input type="hidden" name="action" value="submit" />
                         

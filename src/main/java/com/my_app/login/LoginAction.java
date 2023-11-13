@@ -1,8 +1,5 @@
 package com.my_app.login;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,8 +16,8 @@ public class LoginAction extends Action {
 	}
 
 	@Override
-	public ActionForward perform(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
-			HttpServletResponse res) throws IOException, ServletException {
+	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
+			HttpServletResponse res) throws Exception {
 
 		final LoginForm form = (LoginForm) actionForm;
 

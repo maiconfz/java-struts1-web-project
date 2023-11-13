@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
-<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_0.dtd">
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
     <form-beans>
@@ -21,4 +21,6 @@
             <forward name="loginPage" path="/login.jsp" />
         </action>
     </action-mappings>
+
+    <message-resources parameter="MessageResources" null="false"></message-resources>
 </struts-config>
