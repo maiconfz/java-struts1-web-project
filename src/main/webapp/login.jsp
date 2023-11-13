@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="html" uri="http://jakarta.apache.org/struts/tags-html-1.0.2" %>
+<%@ taglib prefix="bean" uri="http://jakarta.apache.org/struts/tags-bean-1.0.2" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,15 +50,26 @@
                 </div>
                 <div style="padding-top: 30px" class="panel-body">
                     <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <bean:message key="error.common.required"/>
                     <form id="loginform" class="form-horizontal" action="${contextPath}/login.do" method="POST">
-                        <div style="margin-bottom: 25px" class="input-group">
+                        <input type="hidden" name="action" value="submit" />
+                        
+                        <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="nome de utilizador ou email">
+                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="nome de utilizador">
                         </div>
-                        <div style="margin-bottom: 25px" class="input-group">
+                        <div class="text-danger" style="margin-bottom: 15px">
+                            <html:errors property="username" />
+                        </div>
+                        
+                        <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
                         </div>
+                        <div class="text-danger" style="margin-bottom: 15px">
+                            <html:errors property="password" />
+                        </div>
+                        
                         <div style="margin-top: 10px" class="form-group">
                             <div class="col-sm-12 controls">
                                 <button type="submit" id="btn-login" class="btn btn-success">Login </button>

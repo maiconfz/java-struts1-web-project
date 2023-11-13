@@ -14,9 +14,14 @@ import org.apache.struts.action.ActionMapping;
 public class HomeAction extends Action {
 
 	@Override
-	public ActionForward perform(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
-		return mapping.findForward("actionLoginRedir");
+	public ActionForward perform(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
+			HttpServletResponse res) throws IOException, ServletException {
+
+		if (Boolean.TRUE.equals(req.getSession().getAttribute("isLogged"))) {
+			return mapping.findForward("homePage");
+		} else {
+			return mapping.findForward("actionLoginRedir");
+		}
 	}
 
 }

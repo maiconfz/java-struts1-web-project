@@ -1,8 +1,8 @@
 package com.my_app.login;
 
-import org.apache.struts.action.ActionForm;
+import com.my_app.model.BaseActionForm;
 
-public class LoginForm extends ActionForm {
+public class LoginForm extends BaseActionForm {
 	private static final long serialVersionUID = 3648004327226250285L;
 
 	private String username;

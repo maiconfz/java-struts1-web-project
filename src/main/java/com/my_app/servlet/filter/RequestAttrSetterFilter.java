@@ -13,6 +13,7 @@ public class RequestAttrSetterFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		// Doesn't have to do anything
 	}
 
 	@Override
@@ -26,6 +27,7 @@ public class RequestAttrSetterFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
+		// Doesn't have to do anything
 	}
 
 }
