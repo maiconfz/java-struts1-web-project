@@ -55,7 +55,7 @@
                         
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="nome de utilizador">
+                            <input id="login-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="nome de utilizador" />
                         </div>
                         <div class="text-danger" style="margin-bottom: 15px">
                             <html:errors property="username" />
@@ -63,7 +63,7 @@
                         
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" />
                         </div>
                         <div class="text-danger" style="margin-bottom: 15px">
                             <html:errors property="password" />

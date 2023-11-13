@@ -20,6 +20,8 @@ public class LoginAction extends Action {
 			HttpServletResponse res) throws Exception {
 
 		final LoginForm form = (LoginForm) actionForm;
+		
+		req.setAttribute("form", form);
 
 		if ("submit".equals(form.getAction())) {
 			return performSubmit(mapping, form, req, res);
