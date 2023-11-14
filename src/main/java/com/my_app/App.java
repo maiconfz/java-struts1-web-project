@@ -90,6 +90,7 @@ public class App {
 		} finally {
 			try {
 				if (!conn.isClosed()) {
+					conn.commit();
 					conn.close();
 				}
 			} catch (SQLException e) {

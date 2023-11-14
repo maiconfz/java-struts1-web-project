@@ -6,7 +6,7 @@ import com.my_app.repo.impl.UserRepositoryImpl;
 import com.my_app.service.UserService;
 import com.my_app.service.impl.UserServiceImpl;
 
-public class UserServiceFactory implements ServiceFactory<UserService> {
+public class UserServiceFactory implements ConnectionBasedServiceFactory<UserService> {
 
 	@Override
 	public UserService create(Connection conn) {

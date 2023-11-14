@@ -1,5 +1,7 @@
 package com.my_app.login;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,19 +10,23 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class LoginAction extends Action {
-	private final LoginService loginService;
+import com.my_app.login.service.LoginService;
+import com.my_app.login.service.LoginServiceFactory;
 
-	public LoginAction() {
-		this.loginService = new LoginServiceImpl();
+public class LoginAction extends Action {
+	private LoginService loginService;
+
+	private void init(HttpServletRequest req) {
+		this.loginService = new LoginServiceFactory().create((Connection) req.getAttribute("conn"));
 	}
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
+		this.init(req);
 
 		final LoginForm form = (LoginForm) actionForm;
-		
+
 		req.setAttribute("form", form);
 
 		if ("submit".equals(form.getAction())) {

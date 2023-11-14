@@ -22,4 +22,10 @@ public class UserServiceImpl implements UserService {
 		return this.userRepository.findByUsername(username);
 	}
 
+	@Override
+	public boolean userMatchPassword(String username, String password) {
+		final User user = this.findByUsername(username);
+		return user.getPassword().equals(password);
+	}
+
 }
