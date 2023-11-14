@@ -26,7 +26,8 @@ public class LoginServiceImpl implements LoginService {
 		if (StringUtils.isBlank(form.getPassword())) {
 			isValid = false;
 			form.getActionErrors().add("password", new ActionMessage("error.common.required"));
-		} else if (!this.userService.userMatchPassword(form.getUsername(), null)) {
+		} else if (!this.userService.userMatchPassword(form.getUsername(), form.getPassword())) {
+			isValid = false;
 			form.getActionErrors().add("password", new ActionMessage("error.password.wrong"));
 		}
 
