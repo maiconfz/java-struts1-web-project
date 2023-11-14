@@ -2,7 +2,6 @@ package com.my_app;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -13,8 +12,10 @@ import javax.sql.DataSource;
 
 import org.tinylog.Logger;
 
+import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
-import com.my_app.home.db.DataSourceFactory;
+import com.my_app.repo.UserRepository;
+import com.my_app.repo.impl.UserRepositoryImpl;
 
 public class App {
 
@@ -75,14 +76,9 @@ public class App {
 				stmt.executeUpdate();
 			}
 
-			try (final PreparedStatement stmt = conn.prepareStatement("SELECT USERNAME FROM \"USER\"")) {
-				try (final ResultSet rs = stmt.executeQuery()) {
-					while (rs.next()) {
-						Logger.debug("Inserted User: username = {}", rs.getString(1));
-					}
-				}
-			}
+			final UserRepository userRepository = new UserRepositoryImpl(conn);
 
+			Logger.debug("Inserted User: {}", userRepository.findByUsername("admin"));
 		} catch (Exception e) {
 			try {
 				conn.rollback();

@@ -1,4 +1,4 @@
-package com.my_app.home.db;
+package com.my_app.db;
 
 import javax.sql.DataSource;
 
