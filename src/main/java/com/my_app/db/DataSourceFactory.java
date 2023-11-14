@@ -9,7 +9,7 @@ public class DataSourceFactory {
 	public DataSource create() {
 		final JdbcDataSource ds = new JdbcDataSource();
 
-		ds.setURL("jdbc:h2:mem:my_app");
+		ds.setURL("jdbc:h2:mem:my_app;DB_CLOSE_DELAY=-1");
 		ds.setUser("sa");
 		ds.setPassword("sa");
 
