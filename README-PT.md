@@ -1,7 +1,7 @@
-# java7-struts1-jquery-bootstrap3-web-project
+# Projeto web Java 7, Struts 1, jQuery, Bootstrap 3... para avaliações
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](./README.md)
-[![pt](https://img.shields.io/badge/lang-pt--br-green.svg)](./README-PT.md)
+[![pt](https://img.shields.io/badge/lang-pt-green.svg)](./README-PT.md)
 
 Projeto para avaliar o conhecimento necessário para trabalhar com projetos legados utilizando as seguintes tecnologias:
 

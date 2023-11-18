@@ -1,7 +1,7 @@
-# java7-struts1-jquery-bootstrap3-web-project
+# Legacy Java 7, Struts 1, jQuery, Bootstrap 3... web project for evaluations
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](./README.md)
-[![pt](https://img.shields.io/badge/lang-pt--br-green.svg)](./README-PT.md)
+[![pt](https://img.shields.io/badge/lang-pt-green.svg)](./README-PT.md)
 
 Project to evaluate the knowledge needed to work with legacy projects using the following technologies:
 
@@ -17,7 +17,7 @@ Project to evaluate the knowledge needed to work with legacy projects using the 
 ## Tasks
 
 1. Create the logout process (Action, session clean and redirection to Login page. The logout link is already defined in the page header)
-1. Create a public and an private static page displaying any information (Add them to the header menu)
+1. Create a public and a private static page displaying any information (Add them to the header menu)
 
 ### Optional
 
