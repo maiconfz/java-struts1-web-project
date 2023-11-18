@@ -51,6 +51,8 @@ public class LoginAction extends Action {
 			return mapping.findForward("actionHomeRedir");
 		} else {
 			super.saveErrors(req, form.getActionErrors());
+			req.setAttribute("actionErrors", form.getActionErrors());
+			req.setAttribute("validated", true);
 			return mapping.findForward("loginPage");
 		}
 	}

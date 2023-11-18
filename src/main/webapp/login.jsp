@@ -48,88 +48,36 @@
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>
                 </div>
-                <div style="padding-top: 30px" class="panel-body">
-                    <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                    <form id="loginform" class="form-horizontal" action="${contextPath}/login.do" method="POST">
-                        <input type="hidden" name="action" value="submit" />
-                        
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="nome de utilizador" />
-                        </div>
-                        <div class="text-danger" style="margin-bottom: 15px">
-                            <html:errors property="username" />
-                        </div>
-                        
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" />
-                        </div>
-                        <div class="text-danger" style="margin-bottom: 15px">
-                            <html:errors property="password" />
-                        </div>
-                        
-                        <div style="margin-top: 10px" class="form-group">
-                            <div class="col-sm-12 controls">
-                                <button type="submit" id="btn-login" class="btn btn-success">Login </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12 control">
-                                <div style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-                                    <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">Criar conta</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="signupbox" style="display: none; margin-top: 50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="panel-title">Criar conta</div>
-                    <div style="float: right; font-size: 85%; position: relative; top: -10px;">
-                        <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()" style="color: #fff;">Login</a>
-                    </div>
-                </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal">
-                        <div id="signupalert" style="display: none" class="alert alert-danger">
-                            <p>Error:</p>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-md-3 control-label">Email</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="email" placeholder="Email">
+                    <div class="alert alert-danger col-sm-12" hidden></div>
+                    <form id="loginform" action="${contextPath}/login.do" method="POST">
+                        <input type="hidden" name="action" value="submit" />
+
+                        <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" />
+                            </div>
+                            <div class="help-block">
+                                <html:errors property="username" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="firstname" class="col-md-3 control-label">Primeiro Nome</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="firstname" placeholder="Primeiro Nome">
+
+                        <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" />
+                            </div>
+                            <div class="help-block">
+                                <html:errors property="password" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="lastname" class="col-md-3 control-label">Apelido</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="lastname" placeholder="Apelido">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="col-md-3 control-label">Password</label>
-                            <div class="col-md-9">
-                                <input type="password" class="form-control" name="passwd" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button id="btn-signup" type="button" class="btn btn-success">
-                                    Criar conta
-                                </button>
-                            </div>
-                        </div>
+
+                        <button type="submit" id="btn-login" class="btn btn-success">Login</button>
+
+                        <hr />
+
+                        <a href="#">Create account</a>
                     </form>
                 </div>
             </div>
