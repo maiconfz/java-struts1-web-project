@@ -1,5 +1,7 @@
 package com.my_app.login;
 
+import static java.lang.Boolean.TRUE;
+
 import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.my_app.AppConstants;
 import com.my_app.login.service.LoginService;
 import com.my_app.login.service.LoginServiceFactory;
 
@@ -25,7 +28,9 @@ public class LoginAction extends Action {
 
 		req.setAttribute("form", form);
 
-		if ("submit".equals(form.getAction())) {
+		if (TRUE.equals(req.getSession().getAttribute(AppConstants.SESSION_ATTR_KEY_IS_LOGGED_IN))) {
+			return mapping.findForward("actionHomeRedir");
+		} else if ("submit".equals(form.getAction())) {
 			return performSubmit(mapping, form, req, res, loginService);
 		} else {
 			return this.performLogin(mapping, form, req, res);
@@ -41,7 +46,7 @@ public class LoginAction extends Action {
 			HttpServletResponse res, LoginService loginService) {
 
 		if (loginService.validate(form)) {
-			req.getSession().setAttribute("isLogged", Boolean.TRUE);
+			req.getSession().setAttribute(AppConstants.SESSION_ATTR_KEY_IS_LOGGED_IN, true);
 			req.getSession().setAttribute("username", form.getUsername());
 
 			return mapping.findForward("actionHomeRedir");
