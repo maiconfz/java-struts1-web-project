@@ -14,23 +14,19 @@ import com.my_app.login.service.LoginService;
 import com.my_app.login.service.LoginServiceFactory;
 
 public class LoginAction extends Action {
-	private LoginService loginService;
-
-	private void init(HttpServletRequest req) {
-		this.loginService = new LoginServiceFactory().create((Connection) req.getAttribute("conn"));
-	}
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
-		this.init(req);
+
+		final LoginService loginService = new LoginServiceFactory().create((Connection) req.getAttribute("conn"));
 
 		final LoginForm form = (LoginForm) actionForm;
 
 		req.setAttribute("form", form);
 
 		if ("submit".equals(form.getAction())) {
-			return performSubmit(mapping, form, req, res);
+			return performSubmit(mapping, form, req, res, loginService);
 		} else {
 			return this.performLogin(mapping, form, req, res);
 		}
@@ -42,9 +38,9 @@ public class LoginAction extends Action {
 	}
 
 	private ActionForward performSubmit(ActionMapping mapping, LoginForm form, HttpServletRequest req,
-			HttpServletResponse res) {
+			HttpServletResponse res, LoginService loginService) {
 
-		if (this.loginService.validate(form)) {
+		if (loginService.validate(form)) {
 			req.getSession().setAttribute("isLogged", Boolean.TRUE);
 			req.getSession().setAttribute("username", form.getUsername());
 
