@@ -16,8 +16,32 @@ Project to evaluate the knowledge needed to work with legacy projects using the 
 
 ## Tasks
 
-1. Create the logout process (Action, session clean and redirection to Login page. The logout link is already defined in the page header)
-1. Create a public and a private static page displaying any information (Add them to the header menu)
+1. Create a public and a private static page displaying any information
+    - Add them to the header menu and follow the existing pages layout.
+    - Add some bootstrap components just show the usage of them
+
+1. Create the logout process
+    - Action, session clean and redirection to Login page.
+    - The logout link is already defined in the page header
+
+1. Create 2 new attributes for the People
+    - Birthdate
+    - Document (Only required if the person is 18 years old or older)
+        - Type
+        - Number
+
+1. Using the People area as example, create a new one to create Companies as follow
+    - Features
+        - Create
+        - Edit
+        - List
+        - Delete (must be done from the list page and in async way)
+    - Data to collect
+        - Name
+        - Address
+        - VAT Number
+        - Country (list from database)
+        - City (list from database, filtered by the selected country)
 
 ### Optional
 
