@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.User;
@@ -49,6 +51,22 @@ public class UserRepositoryImpl implements UserRepository {
 			return null;
 		} catch (SQLException e) {
 			throw new AppGenericException("Error while querying for User", e);
+		}
+	}
+
+	@Override
+	public List<User> findAll() {
+		try (final PreparedStatement stmt = this.conn.prepareStatement("SELECT ID, USERNAME, PASSWORD FROM \"USER\"");
+				final ResultSet rs = stmt.executeQuery()) {
+			final List<User> users = new LinkedList<>();
+
+			while (rs.next()) {
+				users.add(new User(rs.getLong(1), rs.getString(2), rs.getString(3)));
+			}
+
+			return users;
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while querying for all users", e);
 		}
 	}
 
