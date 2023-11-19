@@ -22,11 +22,6 @@ public class User {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("User [id=%s, username=%s, password=%s]", id, username, password);
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -45,6 +40,11 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("User [id=%s, username=%s, password=%s]", id, username, password);
 	}
 
 }
