@@ -16,32 +16,36 @@ Project to evaluate the knowledge needed to work with legacy projects using the 
 
 ## Tasks
 
-1. Create a public and a private static page displaying any information
-    - Add them to the header menu and follow the existing pages layout.
+1. Fork this repository to make the changes in your own repository
+
+1. Create a public and a private (must be logged in) static page displaying any information
+    - Add them to the header menu and choose an existing page layout
     - Add some bootstrap components just show the usage of them
 
-1. Create the logout process
-    - Action, session clean and redirection to Login page.
+1. Create the logout functionality
+    - Action, session clean and redirection to Login page
     - The logout link is already defined in the page header
 
-1. Create 2 new attributes for the People
-    - Birthdate
+1. Create 2 new attributes for the "People"
+    - Birthdate (Required and should be a valid date)
     - Document (Only required if the person is 18 years old or older)
         - Type
-        - Number
+        - Number (Doesn't need to be a valid document number)
 
-1. Using the People area as example, create a new one to create Companies as follow
+1. Using the "People" area as example, create a new one to create "Companies" as follow
     - Features
         - Create
         - Edit
         - List
-        - Delete (must be done from the list page and in async way)
-    - Data to collect
+        - Delete (must be done from the listing page and in async way)
+    - Data to collect (All required)
         - Name
         - Address
-        - VAT Number
+        - VAT Number (Doesn't need to be a valid VAT number)
         - Country (list from database)
         - City (list from database, filtered by the selected country)
+
+1. Open a pull request (The pull request will not be accepted... it's just for the evaluation)
 
 ### Optional
 
