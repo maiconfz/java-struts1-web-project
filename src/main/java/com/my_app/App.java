@@ -1,7 +1,6 @@
 package com.my_app;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,6 +13,7 @@ import org.tinylog.Logger;
 
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
+import com.my_app.model.User;
 import com.my_app.repo.UserRepository;
 import com.my_app.repo.impl.UserRepositoryImpl;
 
@@ -69,16 +69,13 @@ public class App {
 						"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
 			}
 
-			try (final PreparedStatement stmt = conn
-					.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD) VALUES (?, ?)")) {
-				stmt.setString(1, "admin");
-				stmt.setString(2, "admin");
-				stmt.executeUpdate();
-			}
-
 			final UserRepository userRepository = new UserRepositoryImpl(conn);
 
-			Logger.debug("Inserted User: {}", userRepository.findByUsername("admin"));
+			userRepository.create(new User("admin", "admin"));
+			userRepository.create(new User("user", "user"));
+
+			Logger.debug("All users created: {}", userRepository.findAll());
+
 		} catch (Exception e) {
 			try {
 				conn.rollback();

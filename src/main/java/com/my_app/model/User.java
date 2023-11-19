@@ -8,6 +8,10 @@ public class User {
 	public User() {
 	}
 
+	public User(String username, String password) {
+		this(null, username, password);
+	}
+
 	public User(Long id, String username, String password) {
 		this.id = id;
 		this.username = username;

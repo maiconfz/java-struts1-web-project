@@ -21,10 +21,28 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
+	public User create(User user) {
+		try (final PreparedStatement stmt = this.conn
+				.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD) VALUES (?, ?)")) {
+
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+
+			stmt.executeUpdate();
+
+			return this.findByUsername(user.getUsername());
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while querying for User", e);
+		}
+	}
+
+	@Override
 	public User findById(Long id) {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("SELECT ID, USERNAME, PASSWORD FROM \"USER\" WHERE ID = ?")) {
+
 			stmt.setLong(1, id);
+
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					return new User(rs.getLong(1), rs.getString(2), rs.getString(3));
@@ -41,7 +59,9 @@ public class UserRepositoryImpl implements UserRepository {
 	public User findByUsername(String username) {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("SELECT ID, USERNAME, PASSWORD FROM \"USER\" WHERE USERNAME = ?")) {
+
 			stmt.setString(1, username);
+
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					return new User(rs.getLong(1), rs.getString(2), rs.getString(3));
@@ -58,6 +78,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public List<User> findAll() {
 		try (final PreparedStatement stmt = this.conn.prepareStatement("SELECT ID, USERNAME, PASSWORD FROM \"USER\"");
 				final ResultSet rs = stmt.executeQuery()) {
+
 			final List<User> users = new LinkedList<>();
 
 			while (rs.next()) {
