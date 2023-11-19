@@ -13,8 +13,11 @@ import org.tinylog.Logger;
 
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
+import com.my_app.model.Country;
 import com.my_app.model.User;
+import com.my_app.repo.CountryRepository;
 import com.my_app.repo.UserRepository;
+import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
 
 public class App {
@@ -66,7 +69,7 @@ public class App {
 
 			try (final Statement stmt = conn.createStatement()) {
 				stmt.executeUpdate(
-						"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
+						"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
 			}
 
 			final UserRepository userRepository = new UserRepositoryImpl(conn);
@@ -75,6 +78,19 @@ public class App {
 			userRepository.create(new User("user", "user"));
 
 			Logger.debug("All users created: {}", userRepository.findAll());
+
+			try (final Statement stmt = conn.createStatement()) {
+				stmt.executeUpdate(
+						"CREATE TABLE COUNTRY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL)");
+			}
+
+			final CountryRepository countryRepository = new CountryRepositoryImpl(conn);
+
+			for (int i = 1; i < 11; i++) {
+				countryRepository.create(new Country(String.format("Country %s", String.valueOf(i))));
+			}
+
+			Logger.debug("All countries created: {}", countryRepository.findAll());
 
 		} catch (Exception e) {
 			try {
