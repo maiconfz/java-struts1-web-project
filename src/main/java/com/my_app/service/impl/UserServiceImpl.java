@@ -1,5 +1,7 @@
 package com.my_app.service.impl;
 
+import java.util.List;
+
 import com.my_app.model.User;
 import com.my_app.repo.impl.UserRepositoryImpl;
 import com.my_app.service.UserService;
@@ -13,6 +15,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User create(User user) {
+		return this.userRepository.create(user);
+	}
+
+	@Override
 	public User findById(Long id) {
 		return this.userRepository.findById(id);
 	}
@@ -20,6 +27,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		return this.userRepository.findByUsername(username);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return this.userRepository.findAll();
 	}
 
 	@Override
