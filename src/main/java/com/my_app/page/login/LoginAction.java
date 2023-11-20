@@ -1,4 +1,4 @@
-package com.my_app.login;
+package com.my_app.page.login;
 
 import static java.lang.Boolean.TRUE;
 
@@ -13,8 +13,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.my_app.AppConstants;
-import com.my_app.login.service.LoginService;
-import com.my_app.login.service.LoginServiceFactory;
+import com.my_app.page.login.service.LoginService;
+import com.my_app.page.login.service.LoginServiceFactory;
 
 public class LoginAction extends Action {
 

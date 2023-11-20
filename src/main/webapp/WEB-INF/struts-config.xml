@@ -4,7 +4,7 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="loginForm" type="com.my_app.login.LoginForm"></form-bean>
+        <form-bean name="loginForm" type="com.my_app.page.login.LoginForm"></form-bean>
     </form-beans>
 
     <global-forwards>
@@ -13,11 +13,11 @@
     </global-forwards>
 
     <action-mappings>
-        <action path="/home" type="com.my_app.home.HomeAction" scope="request" input="/home.jsp">
+        <action path="/home" type="com.my_app.page.home.HomeAction" scope="request" input="/home.jsp">
             <forward name="homePage" path="/home.jsp" />
         </action>
 
-        <action name="loginForm" path="/login" type="com.my_app.login.LoginAction" scope="request" input="/login.jsp">
+        <action name="loginForm" path="/login" type="com.my_app.page.login.LoginAction" scope="request" input="/login.jsp">
             <forward name="loginPage" path="/login.jsp" />
         </action>
     </action-mappings>

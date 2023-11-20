@@ -1,9 +1,9 @@
-package com.my_app.login.service;
+package com.my_app.page.login.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionMessage;
 
-import com.my_app.login.LoginForm;
+import com.my_app.page.login.LoginForm;
 import com.my_app.service.UserService;
 
 public class LoginServiceImpl implements LoginService {

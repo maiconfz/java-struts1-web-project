@@ -1,4 +1,4 @@
-package com.my_app.home;
+package com.my_app.page.home;
 
 import static java.lang.Boolean.TRUE;
 

@@ -1,4 +1,4 @@
-package com.my_app.login.service;
+package com.my_app.page.login.service;
 
 import java.sql.Connection;
 

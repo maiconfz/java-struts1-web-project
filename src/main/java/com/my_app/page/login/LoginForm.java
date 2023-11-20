@@ -1,4 +1,4 @@
-package com.my_app.login;
+package com.my_app.page.login;
 
 import com.my_app.model.BaseActionForm;
 
