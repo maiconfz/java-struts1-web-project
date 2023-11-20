@@ -13,10 +13,13 @@ import org.tinylog.Logger;
 
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
+import com.my_app.model.City;
 import com.my_app.model.Country;
 import com.my_app.model.User;
+import com.my_app.repo.CityRepository;
 import com.my_app.repo.CountryRepository;
 import com.my_app.repo.UserRepository;
+import com.my_app.repo.impl.CityRepositoryImpl;
 import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
 
@@ -84,13 +87,24 @@ public class App {
 						"CREATE TABLE COUNTRY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL)");
 			}
 
+			try (final Statement stmt = conn.createStatement()) {
+				stmt.executeUpdate(
+						"CREATE TABLE CITY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, COUNTRY_ID BIGINT NOT NULL, FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID))");
+			}
+
 			final CountryRepository countryRepository = new CountryRepositoryImpl(conn);
+			final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);
 
 			for (int i = 1; i < 11; i++) {
-				countryRepository.create(new Country(String.format("Country %s", String.valueOf(i))));
+				final Country country = countryRepository.create(new Country(String.format("Country %s", i)));
+
+				for (int j = 1; j < 6; j++) {
+					cityRepository.create(new City(String.format("City %s.%s", country.getId(), j), country));
+				}
 			}
 
 			Logger.debug("All countries created: {}", countryRepository.findAll());
+			Logger.debug("All cities created: {}", cityRepository.findAll());
 
 		} catch (Exception e) {
 			try {
