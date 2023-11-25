@@ -68,7 +68,7 @@ public class UserDeleteAction extends Action {
 			this.saveErrors(req, actionErrors);
 		}
 
-		return mapping.findForward("users");
+		return mapping.findForward("actionUsers");
 	}
 
 }

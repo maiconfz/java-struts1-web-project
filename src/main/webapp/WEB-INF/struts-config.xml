@@ -5,13 +5,14 @@
 <struts-config>
     <form-beans>
         <form-bean name="loginForm" type="com.my_app.page.login.LoginForm"></form-bean>
+        <form-bean name="userSaveForm" type="com.my_app.page.user.save.UserSaveForm"></form-bean>
     </form-beans>
 
     <global-forwards>
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
-        <forward name="users" path="/users.do"></forward>
-        <forward name="usersRedir" path="/users.do" redirect="true"></forward>
+        <forward name="actionUsers" path="/users.do"></forward>
+        <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
     </global-forwards>
 
     <action-mappings>
@@ -24,6 +25,9 @@
         </action>
 
         <action path="/users" type="com.my_app.page.user.list.UserListAction" scope="request" input="/user/list.jsp"></action>
+        <action name="userSaveForm" path="/user/save" type="com.my_app.page.user.save.UserSaveAction" scope="request" input="/user/save/form.jsp">
+            <forward name="form" path="/user/save/form.jsp" />
+        </action>
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
     </action-mappings>
 

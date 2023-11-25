@@ -12,7 +12,7 @@
 <jsp:include page="/incl/styles.jsp" />
 </head>
 <body>
-    <jsp:include page="./incl/header.jsp" />
+    <jsp:include page="/incl/header.jsp" />
     <main class="container">
         <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-primary">
@@ -55,6 +55,6 @@
         </div>
     </main>
     <!-- /container -->
-    <jsp:include page="./incl/footer.jsp" />
+    <jsp:include page="/incl/footer.jsp" />
 </body>
 </html>

@@ -13,7 +13,7 @@
 <jsp:include page="/incl/styles.jsp" />
 </head>
 <body>
-    <jsp:include page="../incl/header.jsp" />
+    <jsp:include page="/incl/header.jsp" />
     <main class="container">
         <h1>Users</h1>
         <logic:messagesPresent message="true">
@@ -52,7 +52,7 @@
                                 <td>${user.username}</td>
                                 <td class="text-right">
                                     <div class="btn-group" role="group" aria-label="...">
-                                        <a href="${contextPath}/user/user-save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="${contextPath}/user/save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" title='Delete user "${user.username}"'><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </div>
                                 </td>
@@ -62,9 +62,9 @@
                 </c:choose>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="${contextPath}/user/user-save.do" title="Create new user">New</a>
+        <a class="btn btn-primary" href="${contextPath}/user/save.do" title="Create new user">New</a>
     </main>
     <!-- /container -->
-    <jsp:include page="../incl/footer.jsp" />
+    <jsp:include page="/incl/footer.jsp" />
 </body>
 </html>

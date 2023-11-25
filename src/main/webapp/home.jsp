@@ -12,11 +12,11 @@
 <jsp:include page="/incl/styles.jsp" />
 </head>
 <body>
-    <jsp:include page="./incl/header.jsp" />
+    <jsp:include page="/incl/header.jsp" />
     <main class="container">
         <h1 class="sr-only">Home</h1>
     </main>
     <!-- /container -->
-    <jsp:include page="./incl/footer.jsp" />
+    <jsp:include page="/incl/footer.jsp" />
 </body>
 </html>
