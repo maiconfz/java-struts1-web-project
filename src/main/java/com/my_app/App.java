@@ -69,46 +69,8 @@ public class App {
 		}
 
 		try {
-
-			try (final Statement stmt = conn.createStatement()) {
-				stmt.executeUpdate(
-						"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
-			}
-
-			final UserRepository userRepository = new UserRepositoryImpl(conn);
-
-			userRepository.save(new User("admin", "admin"));
-
-			for (int i = 1; i < 11; i++) {
-				userRepository.save(new User("user" + i, "user" + i));
-			}
-
-			Logger.debug("All users created: {}", userRepository.findAll());
-
-			try (final Statement stmt = conn.createStatement()) {
-				stmt.executeUpdate(
-						"CREATE TABLE COUNTRY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL)");
-			}
-
-			try (final Statement stmt = conn.createStatement()) {
-				stmt.executeUpdate(
-						"CREATE TABLE CITY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, COUNTRY_ID BIGINT NOT NULL, FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID))");
-			}
-
-			final CountryRepository countryRepository = new CountryRepositoryImpl(conn);
-			final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);
-
-			for (int i = 1; i < 11; i++) {
-				final Country country = countryRepository.save(new Country(String.format("Country %s", i)));
-
-				for (int j = 1; j < 6; j++) {
-					cityRepository.save(new City(String.format("City %s.%s", country.getId(), j), country));
-				}
-			}
-
-			Logger.debug("All countries created: {}", countryRepository.findAll());
-			Logger.debug("All cities created: {}", cityRepository.findAll());
-
+			initDbCountriesAndCities(conn);
+			initDbUsers(conn);
 		} catch (Exception e) {
 			try {
 				conn.rollback();
@@ -127,6 +89,49 @@ public class App {
 				throw new AppGenericException("Couldn't close db connection", e);
 			}
 		}
+	}
+
+	private void initDbCountriesAndCities(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE COUNTRY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL)");
+		}
+
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE CITY (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, COUNTRY_ID BIGINT NOT NULL, FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID))");
+		}
+
+		final CountryRepository countryRepository = new CountryRepositoryImpl(conn);
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);
+
+		for (int i = 1; i < 11; i++) {
+			final Country country = countryRepository.save(new Country(String.format("Country %s", i)));
+
+			for (int j = 1; j < 6; j++) {
+				cityRepository.save(new City(String.format("City %s.%s", country.getId(), j), country));
+			}
+		}
+
+		Logger.debug("All countries created: {}", countryRepository.findAll());
+		Logger.debug("All cities created: {}", cityRepository.findAll());
+	}
+
+	private void initDbUsers(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
+		}
+
+		final UserRepository userRepository = new UserRepositoryImpl(conn);
+
+		userRepository.save(new User("admin", "admin"));
+
+		for (int i = 1; i < 11; i++) {
+			userRepository.save(new User("user" + i, "user" + i));
+		}
+
+		Logger.debug("All users created: {}", userRepository.findAll());
 	}
 
 }
