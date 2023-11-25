@@ -8,6 +8,8 @@ public class UserSaveForm extends BaseActionForm {
 	private Long userId;
 	private String username;
 	private String password;
+	private Long countryId;
+	private Long cityId;
 
 	private transient boolean formInit = true;
 
@@ -33,6 +35,22 @@ public class UserSaveForm extends BaseActionForm {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+
+	public Long getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
 	}
 
 	public boolean isFormInit() {

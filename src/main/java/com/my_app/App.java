@@ -3,6 +3,7 @@ package com.my_app;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -29,6 +30,7 @@ public class App {
 
 	private final Context context;
 	private final DataSource dataSource;
+	private final Random random;
 
 	public App() {
 		try {
@@ -38,6 +40,7 @@ public class App {
 		}
 
 		this.dataSource = new DataSourceFactory().create();
+		this.random = new Random();
 		this.initDb();
 	}
 
@@ -57,6 +60,10 @@ public class App {
 
 	public DataSource getDataSource() {
 		return dataSource;
+	}
+
+	public Random getRandom() {
+		return random;
 	}
 
 	private void initDb() {
@@ -120,15 +127,17 @@ public class App {
 	private void initDbUsers(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
-					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL)");
+					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
 		}
 
-		final UserRepository userRepository = new UserRepositoryImpl(conn);
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
+		final UserRepository userRepository = new UserRepositoryImpl(conn, cityRepository);
 
-		userRepository.save(new User("admin", "admin"));
+		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1)));
 
 		for (int i = 1; i < 11; i++) {
-			userRepository.save(new User("user" + i, "user" + i));
+			userRepository.save(
+					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1)));
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());

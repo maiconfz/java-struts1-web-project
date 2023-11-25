@@ -36,7 +36,9 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Country</th>
+                    <th>City</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -52,6 +54,8 @@
                             <tr>
                                 <td>${user.id}</td>
                                 <td>${user.username}</td>
+                                <td>${user.city.country.name}</td>
+                                <td>${user.city.name}</td>
                                 <td class="text-right">
                                     <div class="btn-group" role="group" aria-label="...">
                                         <a href="${contextPath}/user/save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" title='Delete user "${user.username}"'><i class="fa fa-times" aria-hidden="true"></i></a>

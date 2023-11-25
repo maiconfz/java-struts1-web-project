@@ -9,6 +9,11 @@ public class City {
 	public City() {
 	}
 
+	public City(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public City(String name, Country country) {
 		super();
 		this.name = name;

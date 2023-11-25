@@ -4,18 +4,24 @@ public class User {
 	private Long id;
 	private String username;
 	private String password;
+	private City city;
 
 	public User() {
 	}
 
-	public User(String username, String password) {
-		this(null, username, password);
+	public User(String username, String password, City city) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.city = city;
 	}
 
-	public User(Long id, String username, String password) {
+	public User(Long id, String username, String password, City city) {
+		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.city = city;
 	}
 
 	public Long getId() {
@@ -42,13 +48,21 @@ public class User {
 		this.password = password;
 	}
 
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	public boolean isNew() {
 		return this.id == null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("User [id=%s, username=%s, password=%s]", id, username, password);
+		return String.format("User [id=%s, username=%s, password=%s, city=%s]", id, username, password, city);
 	}
 
 }
