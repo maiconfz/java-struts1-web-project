@@ -78,7 +78,10 @@ public class App {
 			final UserRepository userRepository = new UserRepositoryImpl(conn);
 
 			userRepository.create(new User("admin", "admin"));
-			userRepository.create(new User("user", "user"));
+
+			for (int i = 1; i < 11; i++) {
+				userRepository.create(new User("user " + i, "user" + i));
+			}
 
 			Logger.debug("All users created: {}", userRepository.findAll());
 
