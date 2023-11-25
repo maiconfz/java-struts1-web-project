@@ -15,7 +15,7 @@
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
-        <h1>${form.newUser ? 'New' : 'Update'} User ${form.newUser ? '' : form.username}</h1>
+        <h1>${form.newUser ? 'New' : 'Update'}User ${form.newUser ? '' : form.username}</h1>
         <c:if test="${actionErrors.get('form').hasNext()}">
             <div class="alert alert-danger" role="alert">
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
@@ -29,19 +29,46 @@
                     <input type="hidden" name="formInit" value="${form.formInit}" />
                     <input type="hidden" name="userId" value="${form.userId}" />
                     <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
-                        <label for="user-username">Username</label> <input id="user-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" maxlength="100" />
+                        <label for="user-username">Username</label>
+                        <input id="user-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" maxlength="100" required />
                         <div class="help-block">
                             <html:errors property="username" />
                         </div>
                     </div>
                     <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-password">Password</label> <input id="user-password" type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" maxlength="100" />
+                        <label for="user-password">Password</label>
+                        <input id="user-password" type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" maxlength="100" required />
                         <div class="help-block">
                             <html:errors property="password" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-save">Save</button>
+                    <div class="form-group ${actionErrors.get('country').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
+                        <label for="user-country">Country</label>
+                        <select class="form-control" id="user-country" name="countryId" required>
+                            <option value="" hidden>Choose a country</option>
+                            <c:forEach var="country" items="${countries}">
+                                <option value="${country.id}" ${form.countryId eq country.id ? 'selected' : ''}>${country.name}</option>
+                            </c:forEach>
+                        </select>
+                        <div class="help-block">
+                            <html:errors property="country" />
+                        </div>
+                    </div>
+                    <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
+                        <label for="user-city">City</label>
+                        <select class="form-control" id="user-city" name="cityId" required>
+                            <option value="" hidden>Choose a city</option>
+                            <c:forEach var="city" items="${cities}">
+                                <option value="${city.id}" ${form.cityId eq city.id ? 'selected' : ''}>${city.name}</option>
+                            </c:forEach>
+                        </select>
+                        <div class="help-block">
+                            <html:errors property="city" />
+                        </div>
+                    </div>
+                    <a class="btn btn-default" href="${contextPath}/users.do">Back</a>
                     <button type="submit" class="btn btn-default btn-validate">Validate</button>
+                    <button type="submit" class="btn btn-success btn-save">Save</button>
                 </form>
             </div>
         </div>

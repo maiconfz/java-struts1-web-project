@@ -113,10 +113,10 @@ public class App {
 		final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);
 
 		for (int i = 1; i < 11; i++) {
-			final Country country = countryRepository.save(new Country(String.format("Country %s", i)));
+			final Country country = countryRepository.save(new Country(String.format("Country %02d", i)));
 
 			for (int j = 1; j < 6; j++) {
-				cityRepository.save(new City(String.format("City %s.%s", country.getId(), j), country));
+				cityRepository.save(new City(String.format("City %02d.%02d", country.getId(), j), country));
 			}
 		}
 

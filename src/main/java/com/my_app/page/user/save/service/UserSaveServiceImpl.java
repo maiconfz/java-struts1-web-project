@@ -1,5 +1,7 @@
 package com.my_app.page.user.save.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionMessage;
 
@@ -7,14 +9,21 @@ import com.my_app.model.User;
 import com.my_app.page.user.save.UserSaveForm;
 import com.my_app.page.user.save.mapper.UserSaveFormToUserMapper;
 import com.my_app.page.user.save.mapper.UserToUserSaveFormMapper;
+import com.my_app.service.CityService;
+import com.my_app.service.CountryService;
 import com.my_app.service.UserService;
 
 public class UserSaveServiceImpl implements UserSaveService {
 
 	final UserService userService;
+	final CountryService countryService;
+	final CityService cityService;
 
-	public UserSaveServiceImpl(UserService userService) {
+	public UserSaveServiceImpl(UserService userService, CountryService countryService, CityService cityService) {
+		super();
 		this.userService = userService;
+		this.countryService = countryService;
+		this.cityService = cityService;
 	}
 
 	@Override
@@ -43,12 +52,29 @@ public class UserSaveServiceImpl implements UserSaveService {
 			form.getActionErrors().add("password", new ActionMessage("error.common.required"));
 		}
 
+		if (form.getCountryId() == null || form.getCountryId() == 0) {
+			isValid = false;
+			form.getActionErrors().add("country", new ActionMessage("error.common.required"));
+		} else if (form.getCityId() == null || form.getCityId() == 0) {
+			isValid = false;
+			form.getActionErrors().add("city", new ActionMessage("error.common.required"));
+		}
+
 		return isValid;
 	}
 
 	@Override
 	public User saveUser(UserSaveForm form) {
 		return this.userService.save(new UserSaveFormToUserMapper().toUser(form));
+	}
+
+	@Override
+	public void setRequestAttrs(UserSaveForm form, HttpServletRequest req) {
+		req.setAttribute("countries", this.countryService.findAll());
+
+		if (form.getCountryId() != null && form.getCountryId() > 0) {
+			req.setAttribute("cities", this.cityService.findAllByCountryId(form.getCountryId()));
+		}
 	}
 
 }

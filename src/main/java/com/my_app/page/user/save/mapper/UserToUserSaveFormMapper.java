@@ -10,8 +10,11 @@ public class UserToUserSaveFormMapper {
 	}
 
 	public UserSaveForm mapTo(User user, UserSaveForm form) {
+
 		form.setUserId(user.getId());
 		form.setUsername(user.getUsername());
+		form.setCountryId(user.getCity().getCountry().getId());
+		form.setCityId(user.getCity().getId());
 
 		return form;
 	}

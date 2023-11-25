@@ -3,14 +3,14 @@ package com.my_app.service.impl;
 import java.util.List;
 
 import com.my_app.model.User;
-import com.my_app.repo.impl.UserRepositoryImpl;
+import com.my_app.repo.UserRepository;
 import com.my_app.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
-	private final UserRepositoryImpl userRepository;
+	private final UserRepository userRepository;
 
-	public UserServiceImpl(UserRepositoryImpl userRepository) {
+	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 

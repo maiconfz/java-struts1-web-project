@@ -108,20 +108,19 @@ public class CityRepositoryImpl implements CityRepository {
 	}
 
 	@Override
-	public List<City> findByCountry(Country countryParam) {
+	public List<City> findAllByCountryId(Long countryId) {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("SELECT ID, NAME FROM CITY WHERE COUNTRY_ID = ?")) {
 
-			stmt.setLong(1, countryParam.getId());
+			stmt.setLong(1, countryId);
 
 			final List<City> cities = new LinkedList<>();
-			final Country country = this.countryRepository.findById(countryParam.getId());
+			final Country country = this.countryRepository.findById(countryId);
 
 			try (final ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					cities.add(new City(rs.getLong(1), rs.getString(2), country));
 				}
-
 			}
 
 			return cities;
@@ -131,15 +130,25 @@ public class CityRepositoryImpl implements CityRepository {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-
+	public List<City> findAllByCountry(Country country) {
+		return this.findAllByCountryId(country.getId());
 	}
 
 	@Override
-	public void delete(City o) {
-		// TODO Auto-generated method stub
+	public void deleteById(Long id) {
+		try (final PreparedStatement stmt = this.conn.prepareStatement("DELETE CITY WHERE ID = ?")) {
 
+			stmt.setLong(1, id);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while deleting User", e);
+		}
+	}
+
+	@Override
+	public void delete(City city) {
+		this.deleteById(city.getId());
 	}
 
 }

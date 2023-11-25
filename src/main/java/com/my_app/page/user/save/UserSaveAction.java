@@ -47,6 +47,8 @@ public class UserSaveAction extends Action {
 			form.setFormInit(false);
 		}
 
+		userSaveService.setRequestAttrs(form, req);
+
 		return mapping.findForward("form");
 	}
 
@@ -73,7 +75,7 @@ public class UserSaveAction extends Action {
 			req.setAttribute("actionErrors", form.getActionErrors());
 			req.setAttribute("validated", true);
 
-			actionForward = mapping.findForward("form");
+			actionForward = this.performUserSave(mapping, form, req, res, userSaveService);
 		}
 
 		if (!actionMessages.isEmpty()) {

@@ -135,7 +135,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new AppGenericException("Error while querying for User", e);
+			throw new AppGenericException("Error while deleting for User", e);
 		}
 	}
 
