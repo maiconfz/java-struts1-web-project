@@ -10,6 +10,7 @@
     <global-forwards>
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
+        <forward name="users" path="/users.do"></forward>
         <forward name="usersRedir" path="/users.do" redirect="true"></forward>
     </global-forwards>
 

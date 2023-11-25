@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
+<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,20 @@
     <jsp:include page="../incl/header.jsp" />
     <main class="container">
         <h1>Users</h1>
+        <logic:messagesPresent message="true">
+            <div class="alert alert-success" role="alert">
+                <i class="fa fa-check-circle" aria-hidden="true"></i> <span class="sr-only">Success:</span>
+                <html:messages id="msg" message="true">
+                    <bean:write name="msg" filter="false" />
+                </html:messages>
+            </div>
+        </logic:messagesPresent>
+        <logic:messagesPresent message="false">
+            <div class="alert alert-danger" role="alert">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
+                <html:errors />
+            </div>
+        </logic:messagesPresent>
         <table class="table table-hover">
             <thead>
                 <tr>
