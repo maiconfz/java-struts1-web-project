@@ -15,7 +15,7 @@
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
-        <h1>${empty form.newUser ? 'New ' : 'Edit '}User ${empty form.newUser ? '' : form.username}</h1>
+        <h1>${form.newUser ? 'New' : 'Update'} User ${form.newUser ? '' : form.username}</h1>
         <c:if test="${actionErrors.get('form').hasNext()}">
             <div class="alert alert-danger" role="alert">
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>

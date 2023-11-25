@@ -16,20 +16,22 @@
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
         <h1>Users</h1>
-        <logic:messagesPresent message="true">
-            <div class="alert alert-success" role="alert">
-                <i class="fa fa-check-circle" aria-hidden="true"></i> <span class="sr-only">Success:</span>
-                <html:messages id="msg" message="true">
-                    <bean:write name="msg" filter="false" />
-                </html:messages>
-            </div>
-        </logic:messagesPresent>
-        <logic:messagesPresent message="false">
-            <div class="alert alert-danger" role="alert">
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
-                <html:errors />
-            </div>
-        </logic:messagesPresent>
+        <c:choose>
+            <c:when test="${actionMessages.get('topMsgs').hasNext()}">
+                <div class="alert alert-success" role="alert">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> <span class="sr-only">Success:</span>
+                    <html:messages id="msg" message="true">
+                        <bean:write name="msg" filter="false" />
+                    </html:messages>
+                </div>
+            </c:when>
+            <c:when test="${actionErrors.get('topMsgs').hasNext()}">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
+                    <html:errors property="topMsgs" />
+                </div>
+            </c:when>
+        </c:choose>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -52,8 +54,7 @@
                                 <td>${user.username}</td>
                                 <td class="text-right">
                                     <div class="btn-group" role="group" aria-label="...">
-                                        <a href="${contextPath}/user/save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" title='Delete user "${user.username}"'><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a href="${contextPath}/user/save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" title='Delete user "${user.username}"'><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </div>
                                 </td>
                             </tr>

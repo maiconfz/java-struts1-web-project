@@ -1,13 +1,14 @@
 package com.my_app.repo.impl;
 
+import static org.apache.commons.lang3.StringUtils.lowerCase;
+import static org.apache.commons.lang3.StringUtils.replace;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.User;
@@ -35,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD) VALUES (?, ?)")) {
 
-			stmt.setString(1, StringUtils.lowerCase(user.getUsername()));
+			stmt.setString(1, normalizeUsername(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 
 			stmt.executeUpdate();
@@ -50,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("UPDATE \"USER\" SET USERNAME = ?, PASSWORD = ? WHERE ID = ?")) {
 
-			stmt.setString(1, StringUtils.lowerCase(user.getUsername()));
+			stmt.setString(1, normalizeUsername(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 			stmt.setLong(3, user.getId());
 
@@ -86,7 +87,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("SELECT ID, USERNAME, PASSWORD FROM \"USER\" WHERE USERNAME = ?")) {
 
-			stmt.setString(1, StringUtils.lowerCase(username));
+			stmt.setString(1, normalizeUsername(username));
 
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
@@ -132,6 +133,10 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void delete(User user) {
 		this.deleteById(user.getId());
+	}
+
+	private String normalizeUsername(String username) {
+		return replace(lowerCase(username), " ", "_");
 	}
 
 }

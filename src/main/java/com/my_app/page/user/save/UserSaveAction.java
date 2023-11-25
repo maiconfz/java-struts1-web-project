@@ -10,7 +10,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
+import com.my_app.model.User;
 import com.my_app.page.user.save.service.UserSaveService;
 import com.my_app.page.user.save.service.UserSaveServiceFactory;
 import com.my_app.utils.LoginUtils;
@@ -51,15 +53,37 @@ public class UserSaveAction extends Action {
 	private ActionForward performSubmit(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 
+		ActionForward actionForward;
+
+		final ActionMessages actionMessages = new ActionMessages();
+
 		if (userSaveService.validate(form)) {
-			userSaveService.saveUser(form);
-			return mapping.findForward("actionUsers");
+			final User user = userSaveService.saveUser(form);
+
+			if (form.isNewUser()) {
+				actionMessages.add("topMsgs", new ActionMessage("success.user.create.success", user.getUsername()));
+			} else {
+				actionMessages.add("topMsgs", new ActionMessage("success.user.update.success", user.getUsername()));
+			}
+
+			actionForward = mapping.findForward("actionUsers");
 		} else {
 			form.getActionErrors().add("form", new ActionMessage("error.form.validation"));
 			super.saveErrors(req, form.getActionErrors());
 			req.setAttribute("actionErrors", form.getActionErrors());
 			req.setAttribute("validated", true);
-			return mapping.findForward("form");
+
+			actionForward = mapping.findForward("form");
 		}
+
+		if (!actionMessages.isEmpty()) {
+			req.setAttribute("actionMessages", actionMessages);
+			this.saveMessages(req, actionMessages);
+		} else if (!form.getActionErrors().isEmpty()) {
+			req.setAttribute("actionErrors", form.getActionErrors());
+			this.saveErrors(req, form.getActionErrors());
+		}
+
+		return actionForward;
 	}
 }
