@@ -1,7 +1,5 @@
 package com.my_app.page.user.list;
 
-import static java.lang.Boolean.TRUE;
-
 import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +10,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.my_app.AppConstants;
 import com.my_app.service.UserService;
 import com.my_app.service.factory.UserServiceFactory;
+import com.my_app.utils.LoginUtils;
 
 public class UserListAction extends Action {
 
@@ -22,7 +20,7 @@ public class UserListAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
 
-		if (!TRUE.equals(req.getSession().getAttribute(AppConstants.SESSION_ATTR_KEY_IS_LOGGED_IN))) {
+		if (LoginUtils.isUserNotLoggedIn(req.getSession())) {
 			return mapping.findForward("actionLoginRedir");
 		}
 
