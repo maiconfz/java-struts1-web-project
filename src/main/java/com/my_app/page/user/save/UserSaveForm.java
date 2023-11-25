@@ -11,6 +11,8 @@ public class UserSaveForm extends BaseActionForm {
 	private Long countryId;
 	private Long cityId;
 
+	private String originalUsername;
+
 	private transient boolean formInit = true;
 
 	public Long getUserId() {
@@ -51,6 +53,14 @@ public class UserSaveForm extends BaseActionForm {
 
 	public void setCityId(Long cityId) {
 		this.cityId = cityId;
+	}
+
+	public String getOriginalUsername() {
+		return originalUsername;
+	}
+
+	public void setOriginalUsername(String originalUsername) {
+		this.originalUsername = originalUsername;
 	}
 
 	public boolean isFormInit() {

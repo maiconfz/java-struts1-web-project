@@ -12,6 +12,7 @@ import com.my_app.page.user.save.mapper.UserToUserSaveFormMapper;
 import com.my_app.service.CityService;
 import com.my_app.service.CountryService;
 import com.my_app.service.UserService;
+import com.my_app.utils.UserUtils;
 
 public class UserSaveServiceImpl implements UserSaveService {
 
@@ -32,6 +33,7 @@ public class UserSaveServiceImpl implements UserSaveService {
 			final User user = this.userService.findById(form.getUserId());
 
 			new UserToUserSaveFormMapper().mapTo(user, form);
+			form.setOriginalUsername(form.getUsername());
 		}
 	}
 
@@ -42,7 +44,9 @@ public class UserSaveServiceImpl implements UserSaveService {
 		if (StringUtils.isBlank(form.getUsername())) {
 			isValid = false;
 			form.getActionErrors().add("username", new ActionMessage("error.common.required"));
-		} else if (userService.findByUsername(form.getUsername()) != null) {
+		} else if ((form.isNewUser() || (!form.isNewUser()
+				&& !form.getOriginalUsername().equals(UserUtils.normalizeUsername(form.getUsername()))))
+				&& userService.findByUsername(form.getUsername()) != null) {
 			isValid = false;
 			form.getActionErrors().add("username", new ActionMessage("error.user.username-taken"));
 		}

@@ -28,6 +28,8 @@
                     <input type="hidden" name="action" value="submit" />
                     <input type="hidden" name="formInit" value="${form.formInit}" />
                     <input type="hidden" name="userId" value="${form.userId}" />
+                    <input type="hidden" name="originalUsername" value="${form.originalUsername}" />
+
                     <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
                         <label for="user-username">Username</label>
                         <input id="user-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" maxlength="100" required />
@@ -35,6 +37,7 @@
                             <html:errors property="username" />
                         </div>
                     </div>
+
                     <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-password">Password</label>
                         <input id="user-password" type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" maxlength="100" required />
@@ -42,6 +45,7 @@
                             <html:errors property="password" />
                         </div>
                     </div>
+
                     <div class="form-group ${actionErrors.get('country').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-country">Country</label>
                         <select class="form-control" id="user-country" name="countryId" required>
@@ -54,6 +58,7 @@
                             <html:errors property="country" />
                         </div>
                     </div>
+
                     <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-city">City</label>
                         <select class="form-control" id="user-city" name="cityId" required>
@@ -66,6 +71,7 @@
                             <html:errors property="city" />
                         </div>
                     </div>
+
                     <a class="btn btn-default" href="${contextPath}/users.do">Back</a>
                     <button type="submit" class="btn btn-default btn-validate">Validate</button>
                     <button type="submit" class="btn btn-success btn-save">Save</button>
