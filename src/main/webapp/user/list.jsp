@@ -52,7 +52,8 @@
                                 <td>${user.username}</td>
                                 <td class="text-right">
                                     <div class="btn-group" role="group" aria-label="...">
-                                        <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" aria-label="Delete user ${user.username}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a href="${contextPath}/user/user-save.do?userId=${user.id}" class="btn btn-sm btn-default" title='Edit user "${user.username}"'><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" title='Delete user "${user.username}"'><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -61,7 +62,7 @@
                 </c:choose>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="#" title="Create new user">New</a>
+        <a class="btn btn-primary" href="${contextPath}/user/user-save.do" title="Create new user">New</a>
     </main>
     <!-- /container -->
     <jsp:include page="../incl/footer.jsp" />
