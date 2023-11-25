@@ -33,12 +33,18 @@ public class UserSaveAction extends Action {
 		} else if ("submit".equals(form.getAction())) {
 			return performSubmit(mapping, form, req, res, userSaveService);
 		} else {
-			return this.performUserSave(mapping, form, req, res);
+			return this.performUserSave(mapping, form, req, res, userSaveService);
 		}
 	}
 
-	private ActionForward performUserSave(ActionMapping mapping, UserSaveForm actionForm, HttpServletRequest req,
-			HttpServletResponse res) {
+	private ActionForward performUserSave(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
+			HttpServletResponse res, UserSaveService userSaveService) {
+
+		if (form.isFormInit()) {
+			userSaveService.formInit(form);
+			form.setFormInit(false);
+		}
+
 		return mapping.findForward("form");
 	}
 

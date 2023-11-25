@@ -28,7 +28,7 @@ public class CityRepositoryImpl implements CityRepository {
 	}
 
 	@Override
-	public City create(City city) {
+	public City save(City city) {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("INSERT INTO CITY (NAME, COUNTRY_ID) VALUES (?, ?)")) {
 

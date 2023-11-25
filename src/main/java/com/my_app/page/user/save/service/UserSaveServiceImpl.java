@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionMessage;
 import com.my_app.model.User;
 import com.my_app.page.user.save.UserSaveForm;
 import com.my_app.page.user.save.mapper.UserSaveFormToUserMapper;
+import com.my_app.page.user.save.mapper.UserToUserSaveFormMapper;
 import com.my_app.service.UserService;
 
 public class UserSaveServiceImpl implements UserSaveService {
@@ -14,6 +15,15 @@ public class UserSaveServiceImpl implements UserSaveService {
 
 	public UserSaveServiceImpl(UserService userService) {
 		this.userService = userService;
+	}
+
+	@Override
+	public void formInit(UserSaveForm form) {
+		if (!form.isNewUser()) {
+			final User user = this.userService.findById(form.getUserId());
+
+			new UserToUserSaveFormMapper().mapTo(user, form);
+		}
 	}
 
 	@Override

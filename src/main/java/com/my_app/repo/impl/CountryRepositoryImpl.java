@@ -21,7 +21,7 @@ public class CountryRepositoryImpl implements CountryRepository {
 	}
 
 	@Override
-	public Country create(Country country) {
+	public Country save(Country country) {
 		try (final PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO COUNTRY (NAME) VALUES (?)")) {
 
 			stmt.setString(1, country.getName());

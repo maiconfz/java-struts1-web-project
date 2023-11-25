@@ -42,6 +42,10 @@ public class User {
 		this.password = password;
 	}
 
+	public boolean isNew() {
+		return this.id == null;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("User [id=%s, username=%s, password=%s]", id, username, password);

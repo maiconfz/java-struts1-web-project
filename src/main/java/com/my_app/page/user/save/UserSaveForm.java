@@ -5,16 +5,18 @@ import com.my_app.model.BaseActionForm;
 public class UserSaveForm extends BaseActionForm {
 	private static final long serialVersionUID = 3648004327226250285L;
 
-	private Long id;
+	private Long userId;
 	private String username;
 	private String password;
 
-	public Long getId() {
-		return id;
+	private transient boolean formInit = true;
+
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -31,6 +33,18 @@ public class UserSaveForm extends BaseActionForm {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isFormInit() {
+		return formInit;
+	}
+
+	public void setFormInit(boolean formInit) {
+		this.formInit = formInit;
+	}
+
+	public boolean isNewUser() {
+		return this.userId == null || this.userId == 0;
 	}
 
 	public static long getSerialversionuid() {

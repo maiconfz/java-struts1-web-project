@@ -15,7 +15,7 @@
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
-        <h1>${empty form.id ? 'New ' : 'Edit '}User${empty form.id ? '' : form.username}</h1>
+        <h1>${empty form.newUser ? 'New ' : 'Edit '}User ${empty form.newUser ? '' : form.username}</h1>
         <c:if test="${actionErrors.get('form').hasNext()}">
             <div class="alert alert-danger" role="alert">
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
@@ -26,6 +26,8 @@
             <div class="col-xs-12 col-md-4">
                 <form id="user-save-fome" action="${contextPath}/user/save.do" method="POST">
                     <input type="hidden" name="action" value="submit" />
+                    <input type="hidden" name="formInit" value="${form.formInit}" />
+                    <input type="hidden" name="userId" value="${form.userId}" />
                     <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
                         <label for="user-username">Username</label> <input id="user-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" maxlength="100" />
                         <div class="help-block">

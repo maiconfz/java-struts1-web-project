@@ -77,10 +77,10 @@ public class App {
 
 			final UserRepository userRepository = new UserRepositoryImpl(conn);
 
-			userRepository.create(new User("admin", "admin"));
+			userRepository.save(new User("admin", "admin"));
 
 			for (int i = 1; i < 11; i++) {
-				userRepository.create(new User("user" + i, "user" + i));
+				userRepository.save(new User("user" + i, "user" + i));
 			}
 
 			Logger.debug("All users created: {}", userRepository.findAll());
@@ -99,10 +99,10 @@ public class App {
 			final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);
 
 			for (int i = 1; i < 11; i++) {
-				final Country country = countryRepository.create(new Country(String.format("Country %s", i)));
+				final Country country = countryRepository.save(new Country(String.format("Country %s", i)));
 
 				for (int j = 1; j < 6; j++) {
-					cityRepository.create(new City(String.format("City %s.%s", country.getId(), j), country));
+					cityRepository.save(new City(String.format("City %s.%s", country.getId(), j), country));
 				}
 			}
 

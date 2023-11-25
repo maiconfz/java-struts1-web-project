@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Repository<T, ID> {
 
-	T create(T o);
+	T save(T o);
 
 	T findById(ID id);
 

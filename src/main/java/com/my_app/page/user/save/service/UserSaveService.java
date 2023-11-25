@@ -7,4 +7,6 @@ public interface UserSaveService {
 	public boolean validate(UserSaveForm form);
 
 	public User saveUser(UserSaveForm form);
+
+	public void formInit(UserSaveForm form);
 }
