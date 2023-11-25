@@ -9,9 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Users - MyApp</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<link rel="stylesheet" href="${contextPath}/style/main.css">
+<jsp:include page="/incl/styles.jsp" />
 </head>
 <body>
     <jsp:include page="../incl/header.jsp" />
@@ -22,13 +20,14 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <c:choose>
                     <c:when test="${empty users}">
                         <tr>
-                            <td colspan="2">No users</td>
+                            <td colspan="3">No users</td>
                         </tr>
                     </c:when>
                     <c:otherwise>
@@ -36,6 +35,11 @@
                             <tr>
                                 <td>${user.id}</td>
                                 <td>${user.username}</td>
+                                <td class="text-right">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <a href="${contextPath}/user/user-delete.do?userId=${user.id}" class="btn btn-sm btn-danger" aria-label="Delete user ${user.username}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    </div>
+                                </td>
                             </tr>
                         </c:forEach>
                     </c:otherwise>

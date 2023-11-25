@@ -10,6 +10,7 @@
     <global-forwards>
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
+        <forward name="usersRedir" path="/users.do" redirect="true"></forward>
     </global-forwards>
 
     <action-mappings>
@@ -22,6 +23,7 @@
         </action>
 
         <action path="/users" type="com.my_app.page.user.list.UserListAction" scope="request" input="/user/list.jsp"></action>
+        <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
     </action-mappings>
 
     <message-resources parameter="MessageResources" null="false"></message-resources>

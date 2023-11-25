@@ -93,14 +93,19 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		try (final PreparedStatement stmt = this.conn.prepareStatement("DELETE \"USER\" WHERE ID = ?")) {
 
+			stmt.setLong(1, id);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while querying for User", e);
+		}
 	}
 
 	@Override
-	public void delete(User o) {
-		// TODO Auto-generated method stub
-
+	public void delete(User user) {
+		this.deleteById(user.getId());
 	}
 
 }

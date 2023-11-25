@@ -80,7 +80,7 @@ public class App {
 			userRepository.create(new User("admin", "admin"));
 
 			for (int i = 1; i < 11; i++) {
-				userRepository.create(new User("user " + i, "user" + i));
+				userRepository.create(new User("user" + i, "user" + i));
 			}
 
 			Logger.debug("All users created: {}", userRepository.findAll());
