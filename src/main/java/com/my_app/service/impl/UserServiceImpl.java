@@ -40,4 +40,16 @@ public class UserServiceImpl implements UserService {
 		return user.getPassword().equals(password);
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(User o) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

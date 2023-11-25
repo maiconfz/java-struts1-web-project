@@ -91,4 +91,16 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(User o) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -87,4 +87,16 @@ public class CountryRepositoryImpl implements CountryRepository {
 		}
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Country o) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -9,4 +9,8 @@ public interface Repository<T, ID> {
 	T findById(ID id);
 
 	List<T> findAll();
+
+	void deleteById(ID id);
+
+	void delete(T o);
 }

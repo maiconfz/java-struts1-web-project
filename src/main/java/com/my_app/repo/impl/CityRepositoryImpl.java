@@ -130,4 +130,16 @@ public class CityRepositoryImpl implements CityRepository {
 		}
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(City o) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
