@@ -37,8 +37,8 @@
                 <form id="user-save-fome" action="${contextPath}/user/save.do" method="POST">
                     <input type="hidden" name="action" value="submit" />
                     <input type="hidden" name="formInit" value="${form.formInit}" />
-                    <input type="hidden" name="userId" value="${form.userId}" />
-                    <input type="hidden" name="originalUsername" value="${form.originalUsername}" />
+                    <input type="hidden" id="user-id" name="userId" value="${form.userId}" />
+                    <input type="hidden" id="user-original-username" name="originalUsername" value="${form.originalUsername}" />
 
                     <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
                         <label for="user-username">Username</label>
@@ -71,7 +71,7 @@
 
                     <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-city">City</label>
-                        <select class="form-control" id="user-city" name="cityId" required>
+                        <select class="form-control" id="user-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
                             <option value="" hidden>Choose a city</option>
                             <c:forEach var="city" items="${cities}">
                                 <option value="${city.id}" ${form.cityId eq city.id ? 'selected' : ''}>${city.name}</option>
@@ -91,6 +91,7 @@
     </main>
     <!-- /container -->
     <jsp:include page="/incl/footer.jsp" />
+    <script src="${contextPath}/js/service/city-service.js"></script>
     <script src="${contextPath}/user/save/js/form.js"></script>
 </body>
 </html>
