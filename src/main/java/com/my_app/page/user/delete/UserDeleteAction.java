@@ -48,16 +48,16 @@ public class UserDeleteAction extends Action {
 				if (user != null) {
 					userService.delete(user);
 
-					actionMessages.add("topMsgs", new ActionMessage("success.user.delete.success", user.getUsername()));
+					actionMessages.add("topMsgs", new ActionMessage("user.delete.success", user.getUsername()));
 				} else {
-					actionErrors.add("topErrors", new ActionMessage("error.user.not-found"));
+					actionErrors.add("topErrors", new ActionMessage("user.not-found.error"));
 				}
 			} else {
-				actionErrors.add("topErrors", new ActionMessage("error.user.not-found"));
+				actionErrors.add("topErrors", new ActionMessage("user.not-found.error"));
 			}
 
 		} else {
-			actionErrors.add("topErrors", new ActionMessage("error.user.delete.at-least-one"));
+			actionErrors.add("topErrors", new ActionMessage("user.delete.at-least-one.error"));
 			this.saveErrors(req, actionErrors);
 		}
 

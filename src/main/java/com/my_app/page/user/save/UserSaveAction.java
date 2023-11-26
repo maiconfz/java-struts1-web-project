@@ -85,10 +85,10 @@ public class UserSaveAction extends Action {
 
 			if (form.isNewUser()) {
 				form.getActionMessages().add("topMsgs",
-						new ActionMessage("success.user.create.success", user.getUsername()));
+						new ActionMessage("user.create.success", user.getUsername()));
 			} else {
 				form.getActionMessages().add("topMsgs",
-						new ActionMessage("success.user.update.success", user.getUsername()));
+						new ActionMessage("user.update.success", user.getUsername()));
 			}
 
 			actionForward = mapping.findForward("actionUsers");

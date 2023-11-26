@@ -48,7 +48,7 @@ public class UserSaveServiceImpl implements UserSaveService {
 				&& !form.getOriginalUsername().equals(UserUtils.normalizeUsername(form.getUsername()))))
 				&& userService.findByUsername(form.getUsername()) != null) {
 			isValid = false;
-			form.getActionErrors().add("username", new ActionMessage("error.user.username-taken"));
+			form.getActionErrors().add("username", new ActionMessage("user.username-taken.error"));
 		}
 
 		if (StringUtils.isBlank(form.getPassword())) {
