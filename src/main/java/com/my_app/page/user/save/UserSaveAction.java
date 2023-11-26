@@ -21,9 +21,8 @@ public class UserSaveAction extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
-
-		final UserSaveService userSaveService = new UserSaveServiceFactory()
-				.create((Connection) req.getAttribute("conn"));
+		final Connection conn = (Connection) req.getAttribute("conn");
+		final UserSaveService userSaveService = new UserSaveServiceFactory().create(conn);
 
 		final UserSaveForm form = (UserSaveForm) actionForm;
 
@@ -84,11 +83,9 @@ public class UserSaveAction extends Action {
 			final User user = userSaveService.saveUser(form);
 
 			if (form.isNewUser()) {
-				form.getActionMessages().add("topMsgs",
-						new ActionMessage("user.create.success", user.getUsername()));
+				form.getActionMessages().add("topMsgs", new ActionMessage("user.create.success", user.getUsername()));
 			} else {
-				form.getActionMessages().add("topMsgs",
-						new ActionMessage("user.update.success", user.getUsername()));
+				form.getActionMessages().add("topMsgs", new ActionMessage("user.update.success", user.getUsername()));
 			}
 
 			actionForward = mapping.findForward("actionUsers");

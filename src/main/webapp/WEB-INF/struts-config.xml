@@ -29,6 +29,8 @@
             <forward name="form" path="/user/save/form.jsp" />
         </action>
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
+        
+        <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>
     </action-mappings>
 
     <message-resources parameter="MessageResources" null="false"></message-resources>
