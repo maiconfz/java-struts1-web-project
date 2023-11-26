@@ -10,7 +10,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.my_app.model.User;
 import com.my_app.page.user.save.service.UserSaveService;
@@ -32,14 +31,16 @@ public class UserSaveAction extends Action {
 
 		if (LoginUtils.isUserNotLoggedIn(req.getSession())) {
 			return mapping.findForward("loginRedir");
-		} else if ("submit".equals(form.getAction())) {
-			return performSubmit(mapping, form, req, res, userSaveService);
+		} else if ("save".equals(form.getAction())) {
+			return executeSaveAction(mapping, form, req, res, userSaveService);
+		} else if ("validate".equals(form.getAction())) {
+			return executeValidateAction(mapping, form, req, res, userSaveService);
 		} else {
-			return this.performUserSave(mapping, form, req, res, userSaveService);
+			return this.executeFormAction(mapping, form, req, res, userSaveService);
 		}
 	}
 
-	private ActionForward performUserSave(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
+	private ActionForward executeFormAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 
 		if (form.isFormInit()) {
@@ -52,35 +53,55 @@ public class UserSaveAction extends Action {
 		return mapping.findForward("form");
 	}
 
-	private ActionForward performSubmit(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
+	private ActionForward executeValidateAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
+			HttpServletResponse res, UserSaveService userSaveService) {
+
+		if (userSaveService.validate(form)) {
+			form.getActionMessages().add("topMsgs", new ActionMessage("form.validation.success", form.getUsername()));
+		} else {
+			form.getActionErrors().add("topMsgs", new ActionMessage("form.validation.error"));
+		}
+
+		if (!form.getActionMessages().isEmpty()) {
+			req.setAttribute("actionMessages", form.getActionMessages());
+			this.saveMessages(req, form.getActionMessages());
+		} else if (!form.getActionErrors().isEmpty()) {
+			req.setAttribute("actionErrors", form.getActionErrors());
+			this.saveErrors(req, form.getActionErrors());
+		}
+
+		req.setAttribute("validated", true);
+
+		return this.executeFormAction(mapping, form, req, res, userSaveService);
+	}
+
+	private ActionForward executeSaveAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 
 		ActionForward actionForward;
-
-		final ActionMessages actionMessages = new ActionMessages();
 
 		if (userSaveService.validate(form)) {
 			final User user = userSaveService.saveUser(form);
 
 			if (form.isNewUser()) {
-				actionMessages.add("topMsgs", new ActionMessage("success.user.create.success", user.getUsername()));
+				form.getActionMessages().add("topMsgs",
+						new ActionMessage("success.user.create.success", user.getUsername()));
 			} else {
-				actionMessages.add("topMsgs", new ActionMessage("success.user.update.success", user.getUsername()));
+				form.getActionMessages().add("topMsgs",
+						new ActionMessage("success.user.update.success", user.getUsername()));
 			}
 
 			actionForward = mapping.findForward("actionUsers");
 		} else {
-			form.getActionErrors().add("form", new ActionMessage("error.form.validation"));
-			super.saveErrors(req, form.getActionErrors());
-			req.setAttribute("actionErrors", form.getActionErrors());
+			form.getActionErrors().add("topMsgs", new ActionMessage("form.validation.error"));
 			req.setAttribute("validated", true);
 
-			actionForward = this.performUserSave(mapping, form, req, res, userSaveService);
+			actionForward = this.executeFormAction(mapping, form, req, res, userSaveService);
 		}
 
-		if (!actionMessages.isEmpty()) {
-			req.setAttribute("actionMessages", actionMessages);
-			this.saveMessages(req, actionMessages);
+		if (!form.getActionMessages().isEmpty()) {
+			req.setAttribute("actionMessages", form.getActionMessages());
+			this.saveMessages(req, form.getActionMessages());
 		} else if (!form.getActionErrors().isEmpty()) {
 			req.setAttribute("actionErrors", form.getActionErrors());
 			this.saveErrors(req, form.getActionErrors());

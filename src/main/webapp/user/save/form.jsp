@@ -15,13 +15,23 @@
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
-        <h1>${form.newUser ? 'New' : 'Update'}User ${form.newUser ? '' : form.username}</h1>
-        <c:if test="${actionErrors.get('form').hasNext()}">
-            <div class="alert alert-danger" role="alert">
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
-                <html:errors property="form" />
-            </div>
-        </c:if>
+        <h1>${form.newUser ? 'New' : 'Update'} User ${form.newUser ? '' : form.username}</h1>
+        <c:choose>
+            <c:when test="${actionMessages.get('topMsgs').hasNext()}">
+                <div class="alert alert-success" role="alert">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> <span class="sr-only">Success:</span>
+                    <html:messages id="msg" message="true">
+                        <bean:write name="msg" filter="false" />
+                    </html:messages>
+                </div>
+            </c:when>
+            <c:when test="${actionErrors.get('topMsgs').hasNext()}">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span class="sr-only">Error:</span>
+                    <html:errors property="topMsgs" />
+                </div>
+            </c:when>
+        </c:choose>
         <div class="row">
             <div class="col-xs-12 col-md-4">
                 <form id="user-save-fome" action="${contextPath}/user/save.do" method="POST">
@@ -40,7 +50,7 @@
 
                     <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-password">Password</label>
-                        <input id="user-password" type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" maxlength="100" required />
+                        <input id="user-password" type="password" class="form-control" name="password" value="${form.password}" placeholder="Password" aria-label="Password" maxlength="100" required />
                         <div class="help-block">
                             <html:errors property="password" />
                         </div>

@@ -59,9 +59,16 @@ public class UserSaveServiceImpl implements UserSaveService {
 		if (form.getCountryId() == null || form.getCountryId() == 0) {
 			isValid = false;
 			form.getActionErrors().add("country", new ActionMessage("error.common.required"));
-		} else if (form.getCityId() == null || form.getCityId() == 0) {
+		}
+
+		if (form.getCityId() == null || form.getCityId() == 0) {
 			isValid = false;
-			form.getActionErrors().add("city", new ActionMessage("error.common.required"));
+
+			if (form.getCountryId() == null || form.getCountryId() == 0) {
+				form.getActionErrors().add("city", new ActionMessage("form.field.pre-choose", "Country"));
+			} else {
+				form.getActionErrors().add("city", new ActionMessage("error.common.required"));
+			}
 		}
 
 		return isValid;
