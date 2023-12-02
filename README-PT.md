@@ -14,31 +14,34 @@ Projeto para avaliar o conhecimento necessário para trabalhar com projetos lega
 - Jquery
 - Bootstrap 3.x
 
+## Notas e dicas
+
+1. Você pode usar o site <https://www.lipsum.com/> para gerar textos
+1. O "nível de compilação do Java" do projeto é 7, mas você deve usar o Java 8u202 e não pode usar os recursos do Java 8. (Você pode baixar o jdk em <https://www.oracle.com/pt/java/technologies/javase/javase8-archive-downloads.html>)
+
 ## Tarefas
 
-
 1. Faça um fork deste repositório para fazer as alterações em seu próprio repositório
+
+1. Configure o projeto para rodar em um servidor Tomcat 7, com java 8u202
 
 1. Crie uma página estática pública e outra privada (deve estar logado) exibindo qualquer informação
      - Adicione-os ao menu do cabeçalho e escolha um layout de página existente
      - Adicione alguns componentes de bootstrap, apenas mostre o uso deles
 
 1. Crie a funcionalidade de logout
-     - Ação, limpeza de sessão e redirecionamento para página de Login
+     - Action, limpeza de sessão e redirecionamento para página de Login
      - O link de logout já está definido no cabeçalho da página
 
-1. Crie 2 novos atributos para "People"
-     - Data de nascimento (obrigatório e deve ser uma data válida)
-     - Documento (Obrigatório apenas se a pessoa tiver 18 anos ou mais)
-         - Tipo
-         - Número (não precisa ser um número de documento válido)
+1. Crie um novo atributo para o "User"
+     - email (Obrigatório e deve ser um email válido. Use regex ou qualquer lib para validá-lo)
 
-1. Usando a área "People" como exemplo, crie uma nova para criar "Companies" conforme segue
+1. Utilizando a área do "User" como exemplo, crie a área "Companies" com as seguintes funcionalidades:
      - Características
+         - Lista
          - Criar
          - Editar
-         - Lista
-         - Excluir (deve ser feito na página de listagem e de forma assíncrona)
+         - Excluir
      - Dados a serem coletados (todos necessários)
          - Nome
          - Endereço
@@ -51,12 +54,3 @@ Projeto para avaliar o conhecimento necessário para trabalhar com projetos lega
 ### Opcional
 
 1. Converta o projeto em um projeto Maven/Gradle
-
-### Opcional
-
-1. Converta o projeto em um projeto Maven/Gradle
-
-## Notas e dicas
-
-1. Você pode usar o site https://www.lipsum.com/ para gerar textos
-1. O nível de compilação java do projeto é 1.7, mas você pode usar um jdk 1.8 até 1.8.265 (não é possível usar recursos java 8)
