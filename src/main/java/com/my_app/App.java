@@ -62,39 +62,27 @@ public class App {
 		return dataSource;
 	}
 
+	public Connection getConnection(boolean autoCommit) throws SQLException {
+		final Connection conn = this.dataSource.getConnection();
+		conn.setAutoCommit(autoCommit);
+		return conn;
+	}
+
+	public Connection getConnection() throws SQLException {
+		return this.getConnection(true);
+	}
+
 	public Random getRandom() {
 		return random;
 	}
 
 	private void initDb() {
-		Connection conn;
 
-		try {
-			conn = this.dataSource.getConnection();
-		} catch (SQLException e) {
-			throw new AppGenericException("Couldn't get db connection", e);
-		}
-
-		try {
+		try (final Connection conn = this.dataSource.getConnection()) {
 			initDbCountriesAndCities(conn);
 			initDbUsers(conn);
-		} catch (Exception e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				throw new AppGenericException("Couldn't rollback db connection", e);
-			}
-
-			throw new AppGenericException("Couldn't insert initial db data", e);
-		} finally {
-			try {
-				if (!conn.isClosed()) {
-					conn.commit();
-					conn.close();
-				}
-			} catch (SQLException e) {
-				throw new AppGenericException("Couldn't close db connection", e);
-			}
+		} catch (SQLException e) {
+			throw new AppGenericException("Error trying to insert initial db data", e);
 		}
 	}
 
