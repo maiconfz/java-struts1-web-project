@@ -21,5 +21,9 @@
         </div>
     </div>
 </footer>
+
+<div class="loading-splash" hidden><i class="fa fa-spinner fa-pulse fa-4x"></i><span class="sr-only">Loading...</span></div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="${contextPath}/js/my-app.js"></script>
