@@ -23,7 +23,7 @@ Projeto para avaliar o conhecimento necessário para trabalhar com projetos lega
 
 1. Faça um fork deste repositório para fazer as alterações em seu próprio repositório
 
-1. Configure o projeto para rodar em um servidor Tomcat 7, com java 8u202
+1. Configure o projeto para rodar em um servidor [Tomcat 7](https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/), com java 8u202
 
 1. Crie uma página estática pública e outra privada (deve estar logado) exibindo qualquer informação
      - Adicione-os ao menu do cabeçalho e escolha um layout de página existente

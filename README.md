@@ -23,7 +23,7 @@ Project to evaluate the knowledge needed to work with legacy projects using the 
 
 1. Fork this repository to make the changes on your own repository
 
-1. Configure the project to run on a Tomcat 7 server, with java 8u202
+1. Configure the project to run on a [Tomcat 7](https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/) server, with java 8u202
 
 1. Create a public and a private (must be logged in) static page displaying any information
     - Add them to the header menu and choose an existing page layout
