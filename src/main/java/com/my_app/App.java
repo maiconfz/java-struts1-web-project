@@ -27,10 +27,6 @@ import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
 import com.my_app.repo.impl.CompanyRepositoryImpl;
 
-/**
- * The App class represents the main application singleton responsible for managing the application's context,
- * data source, database initialization, and providing database connections.
- */
 public class App {
 
 	private static App instance;
@@ -51,11 +47,6 @@ public class App {
 		this.initDb();
 	}
 
-	/**
-     * Retrieves the singleton instance of the App class.
-     *
-     * @return The App instance.
-     */
 	public static App get() {
 		if (instance == null) {
 			synchronized (App.class) {
@@ -66,59 +57,29 @@ public class App {
 		return instance;
 	}
 
-	/**
-     * Gets the application context.
-     *
-     * @return The application context.
-     */
 	public Context getContext() {
 		return context;
 	}
 
-	/**
-     * Gets the application data source.
-     *
-     * @return The application data source.
-     */
 	public DataSource getDataSource() {
 		return dataSource;
 	}
 
-	/**
-     * Retrieves a database connection with the specified auto-commit setting.
-     *
-     * @param autoCommit The auto-commit setting for the connection.
-     * @return The database connection.
-     * @throws SQLException If a SQL error occurs while creating the connection.
-     */
+	
 	public Connection getConnection(boolean autoCommit) throws SQLException {
 		final Connection conn = this.dataSource.getConnection();
 		conn.setAutoCommit(autoCommit);
 		return conn;
 	}
 
-	/**
-     * Retrieves a database connection with auto-commit enabled.
-     *
-     * @return The database connection.
-     * @throws SQLException If a SQL error occurs while creating the connection.
-     */
 	public Connection getConnection() throws SQLException {
 		return this.getConnection(true);
 	}
 
-	/**
-     * Gets the application random number generator.
-     *
-     * @return The random number generator.
-     */
 	public Random getRandom() {
 		return random;
 	}
 
-	/**
-     * Initializes the application's database by creating tables and inserting initial data.
-     */
 	private void initDb() {
 
 		try (final Connection conn = this.dataSource.getConnection()) {
@@ -130,12 +91,6 @@ public class App {
 		}
 	}
 
-	/**
-     * Initializes the countries and cities tables in the database.
-     *
-     * @param conn The database connection.
-     * @throws SQLException If a SQL error occurs during the initialization.
-     */
 	private void initDbCountriesAndCities(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
@@ -162,12 +117,6 @@ public class App {
 		Logger.debug("All cities created: {}", cityRepository.findAll());
 	}
 
-	/**
-     * Initializes the users table in the database.
-     *
-     * @param conn The database connection.
-     * @throws SQLException If a SQL error occurs during the initialization.
-     */
 
 	
 	private void initDbUsers(Connection conn) throws SQLException {

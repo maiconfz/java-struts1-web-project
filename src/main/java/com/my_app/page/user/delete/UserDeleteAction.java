@@ -19,22 +19,8 @@ import com.my_app.service.UserService;
 import com.my_app.service.factory.UserServiceFactory;
 import com.my_app.utils.LoginUtils;
 
-/**
- * UserDeleteAction is a Struts action class responsible for handling user deletion requests.
- * It verifies user authentication, deletes the specified user, and handles success or error messages.
- */
 public class UserDeleteAction extends Action {
 
-	/**
-     * Executes the user deletion action based on the provided parameters.
-     *
-     * @param mapping   The ActionMapping used to select this instance.
-     * @param actionForm The optional ActionForm bean for this request.
-     * @param req       The HTTP request we are processing.
-     * @param res       The HTTP response we are creating.
-     * @return The forward name associated with the success or error outcome.
-     * @throws Exception if an error occurs during processing.
-     */
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {

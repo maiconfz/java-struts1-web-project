@@ -6,19 +6,10 @@ import com.my_app.model.Company;
 import com.my_app.repo.CompanyRepository;
 import com.my_app.service.CompanyService;
 
-/**
- * The UserServiceImpl class implements the UserService interface and provides
- * the implementation for CRUD operations related to the User entity.
- */
 public class CompanyServiceImpl implements CompanyService {
 
 	private final CompanyRepository companyRepository;
 
-	/**
-     * Constructs a UserServiceImpl with the specified UserRepository.
-     *
-     * @param userRepository The UserRepository to be used for database operations.
-     */
 	public CompanyServiceImpl(CompanyRepository companyRepository) {
 		this.companyRepository = companyRepository;
 	}

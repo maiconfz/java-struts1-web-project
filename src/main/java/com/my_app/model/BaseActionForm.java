@@ -4,15 +4,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMessages;
 
-/**
- * Base action form for Struts actions.
- */
 public class BaseActionForm extends ActionForm {
-	
-	/**
-	 * Unique identifier for version control during object serialization.
-	 * Helps ensure compatibility during deserialization after class modifications.
-	 */
 	
 	private static final long serialVersionUID = -790204658587517103L;
 

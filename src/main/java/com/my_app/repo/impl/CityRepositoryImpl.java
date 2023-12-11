@@ -15,22 +15,12 @@ import com.my_app.model.Country;
 import com.my_app.repo.CityRepository;
 import com.my_app.repo.CountryRepository;
 
-/**
- * The CityRepositoryImpl class provides an implementation for the CityRepository interface.
- * It performs CRUD operations for City entities using JDBC and SQL.
- */
 public class CityRepositoryImpl implements CityRepository {
 
 	private final Connection conn;
 
 	private final CountryRepository countryRepository;
 
-	/**
-     * Constructs a CityRepositoryImpl with the given database connection and CountryRepository.
-     *
-     * @param conn              The database connection.
-     * @param countryRepository The CountryRepository for associated operations.
-     */
 	public CityRepositoryImpl(Connection conn, CountryRepository countryRepository) {
 		super();
 		this.conn = conn;

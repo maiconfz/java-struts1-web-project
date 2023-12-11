@@ -1,8 +1,5 @@
 package com.my_app.model;
 
-/**
- * Represents a city with an identifier, name, and associated country.
- */
 public class City {
 	
 	/*Fields*/
@@ -59,7 +56,6 @@ public class City {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-	
 	
 	/*ToString*/
 	@Override

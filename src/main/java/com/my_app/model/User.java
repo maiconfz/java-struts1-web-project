@@ -1,8 +1,5 @@
 package com.my_app.model;
 
-/**
- * Represents a user with an identifier, username, password, and associated city.
- */
 public class User {
 	
 	/*Fields*/
@@ -74,12 +71,6 @@ public class User {
 		this.city = city;
 	}
 
-	/**
-	 * Checks if the user is a new entity, i.e., not yet persisted in the database.
-	 * 
-	 * @return {@code true} if the user is new and has not been saved to the database,
-	 *         {@code false} otherwise.
-	 */
 	public boolean isNew() {
 		return this.id == null;
 	}

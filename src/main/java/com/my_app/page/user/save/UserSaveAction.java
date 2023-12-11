@@ -16,23 +16,8 @@ import com.my_app.page.user.save.service.UserSaveService;
 import com.my_app.page.user.save.service.UserSaveServiceFactory;
 import com.my_app.utils.LoginUtils;
 
-/**
- * The UserSaveAction class extends the Struts Action class and handles user save-related actions.
- * It interacts with the UserSaveService to perform form initialization, validation, and user saving.
- */
 public class UserSaveAction extends Action {
 
-	/**
-     * Executes the user save action based on the specified form action and performs
-     * the necessary operations such as form initialization, validation, and saving.
-     *
-     * @param mapping     The ActionMapping.
-     * @param actionForm  The UserSaveForm containing user details.
-     * @param req         The HttpServletRequest.
-     * @param res         The HttpServletResponse.
-     * @return The ActionForward indicating the next step in the user save process.
-     * @throws Exception If an error occurs during the execution.
-     */
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
@@ -54,17 +39,6 @@ public class UserSaveAction extends Action {
 		}
 	}
 
-
-	/**
-     * Executes the form action, which includes form initialization and setting request attributes.
-     *
-     * @param mapping         The ActionMapping.
-     * @param form            The UserSaveForm containing user details.
-     * @param req             The HttpServletRequest.
-     * @param res             The HttpServletResponse.
-     * @param userSaveService The UserSaveService for handling user save operations.
-     * @return The ActionForward indicating the next step in the user save process.
-     */
 	private ActionForward executeFormAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 
@@ -78,16 +52,6 @@ public class UserSaveAction extends Action {
 		return mapping.findForward("form");
 	}
 
-	/**
-     * Executes the validate action, which validates the user input in the form.
-     *
-     * @param mapping         The ActionMapping.
-     * @param form            The UserSaveForm containing user details.
-     * @param req             The HttpServletRequest.
-     * @param res             The HttpServletResponse.
-     * @param userSaveService The UserSaveService for handling user save operations.
-     * @return The ActionForward indicating the next step in the user save process.
-     */
 	private ActionForward executeValidateAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 
@@ -110,16 +74,6 @@ public class UserSaveAction extends Action {
 		return this.executeFormAction(mapping, form, req, res, userSaveService);
 	}
 
-	/**
-     * Executes the save action, which saves the user details after validation.
-     *
-     * @param mapping         The ActionMapping.
-     * @param form            The UserSaveForm containing user details.
-     * @param req             The HttpServletRequest.
-     * @param res             The HttpServletResponse.
-     * @param userSaveService The UserSaveService for handling user save operations.
-     * @return The ActionForward indicating the next step in the user save process.
-     */
 	private ActionForward executeSaveAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
 

@@ -2,11 +2,6 @@ package com.my_app.page.user.save;
 
 import com.my_app.model.BaseActionForm;
 
-/**
- * The UserSaveForm class extends the BaseActionForm and represents the form for
- * saving or updating user details. It holds user-related input fields and flags
- * for form initialization and user status.
- */
 public class UserSaveForm extends BaseActionForm {
 	private static final long serialVersionUID = 3648004327226250285L;
 
@@ -78,29 +73,14 @@ public class UserSaveForm extends BaseActionForm {
 		this.originalUsername = originalUsername;
 	}
 
-	/**
-     * Checks if the form is in the initialization state.
-     *
-     * @return True if the form is in the initialization state; false otherwise.
-     */
 	public boolean isFormInit() {
 		return formInit;
 	}
 
-	/**
-     * Sets the form initialization state.
-     *
-     * @param formInit The form initialization state to set.
-     */
 	public void setFormInit(boolean formInit) {
 		this.formInit = formInit;
 	}
 
-	 /**
-     * Checks if the user is new.
-     *
-     * @return True if the user is new; false otherwise.
-     */
 	public boolean isNewUser() {
 		return this.userId == null || this.userId == 0;
 	}

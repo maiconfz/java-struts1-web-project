@@ -16,21 +16,11 @@ import com.my_app.repo.CompanyRepository;
 import com.my_app.repo.UserRepository;
 import com.my_app.utils.CompanyUtils;
 
-/**
- * The UserRepositoryImpl class provides an implementation for the UserRepository interface.
- * It performs CRUD operations for User entities using JDBC and SQL.
- */
 public class CompanyRepositoryImpl implements CompanyRepository {
 
 	private final Connection conn;
 	private final CityRepository cityRepository;
 
-	/**
-     * Constructs a UserRepositoryImpl with the given database connection and CityRepository.
-     *
-     * @param conn            The database connection.
-     * @param cityRepository The CityRepository for managing City entities.
-     */
 	public CompanyRepositoryImpl(Connection conn, CityRepository cityRepository) {
 		super();
 		this.conn = conn;
