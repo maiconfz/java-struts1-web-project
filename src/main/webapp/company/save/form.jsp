@@ -9,13 +9,13 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Users - MyApp</title>
+<title>Companies - MyApp</title>
 <jsp:include page="/incl/styles.jsp" />
 </head>
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
-        <h1>${form.newUser ? 'New' : 'Update'} User ${form.newUser ? '' : form.username}</h1>
+        <h1>${form.newCompany ? 'New' : 'Update'} Company ${form.newCompany ? '' : form.name}</h1>
         <c:choose>
             <c:when test="${actionMessages.get('topMsgs').hasNext()}">
                 <div class="alert alert-success" role="alert">
@@ -34,39 +34,39 @@
         </c:choose>
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <form id="user-save-fome" action="${contextPath}/user/save.do" method="POST">
+                <form id="company-save-fome" action="${contextPath}/company/save.do" method="POST">
                     <input type="hidden" name="action" value="submit" />
                     <input type="hidden" name="formInit" value="${form.formInit}" />
-                    <input type="hidden" id="user-id" name="userId" value="${form.userId}" />
-                    <input type="hidden" id="user-original-username" name="originalUsername" value="${form.originalUsername}" />
+                    <input type="hidden" id="company-id" name="companyId" value="${form.companyId}" />
+                    <input type="hidden" id="company-original-name" name="originalName" value="${form.originalName}" />
 
-                    <div class="form-group ${actionErrors.get('username').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
-                        <label for="user-username">Username</label>
-                        <input id="user-username" type="text" class="form-control" name="username" value="${form.username}" placeholder="Username" aria-label="Username" maxlength="100" required />
+                    <div class="form-group ${actionErrors.get('name').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
+                        <label for="company-name">Name</label>
+                        <input id="company-name" type="text" class="form-control" name="name" value="${form.name}" placeholder="Name" aria-label="Name" maxlength="100" required />
                         <div class="help-block">
-                            <html:errors property="username" />
+                            <html:errors property="name" />
                         </div>
                     </div>
 
-                    <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-password">Password</label>
-                        <input id="user-password" type="password" class="form-control" name="password" value="${form.password}" placeholder="Password" aria-label="Password" maxlength="100" required />
+                    <div class="form-group ${actionErrors.get('address').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
+                        <label for="company-address">Address</label>
+                        <input id="company-address" type="address" class="form-control" name="address" value="${form.address}" placeholder="Address" aria-label="Address" maxlength="100" required />
                         <div class="help-block">
-                            <html:errors property="password" />
+                            <html:errors property="address" />
                         </div>
                     </div>
                     
-                     <div class="form-group ${actionErrors.get('email').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-email">Email</label>
-                        <input id="user-email" type="email" class="form-control" name="email" value="${form.email}" placeholder="Email" aria-label="Email" maxlength="100" required />
+                     <div class="form-group ${actionErrors.get('vatNumber').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
+                        <label for="company-vatNumber">Email</label>
+                        <input id="company-vatNumber" type="vatNumber" class="form-control" name="vatNumber" value="${form.vatNumber}" placeholder="VATNumber" aria-label="VATNumber" maxlength="100" required />
                         <div class="help-block">
-                            <html:errors property="email" />
+                            <html:errors property="vatNumber" />
                         </div>
                     </div>
 
                     <div class="form-group ${actionErrors.get('country').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-country">Country</label>
-                        <select class="form-control" id="user-country" name="countryId" required>
+                        <label for="company-country">Country</label>
+                        <select class="form-control" id="company-country" name="countryId" required>
                             <option value="" hidden>Choose a country</option>
                             <c:forEach var="country" items="${countries}">
                                 <option value="${country.id}" ${form.countryId eq country.id ? 'selected' : ''}>${country.name}</option>
@@ -78,8 +78,8 @@
                     </div>
 
                     <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-city">City</label>
-                        <select class="form-control" id="user-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
+                        <label for="company-city">City</label>
+                        <select class="form-control" id="company-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
                             <option value="" hidden>Choose a city</option>
                             <c:forEach var="city" items="${cities}">
                                 <option value="${city.id}" ${form.cityId eq city.id ? 'selected' : ''}>${city.name}</option>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
 
-                    <a class="btn btn-default" href="${contextPath}/users.do">Back</a>
+                    <a class="btn btn-default" href="${contextPath}/companies.do">Back</a>
                     <button type="submit" class="btn btn-default btn-validate">Validate</button>
                     <button type="submit" class="btn btn-success btn-save">Save</button>
                 </form>
@@ -100,6 +100,6 @@
     <!-- /container -->
     <jsp:include page="/incl/footer.jsp" />
     <script src="${contextPath}/js/service/city-service.js"></script>
-    <script src="${contextPath}/user/save/js/form.js"></script>
+    <script src="${contextPath}/company/save/js/form.js"></script>
 </body>
 </html>
