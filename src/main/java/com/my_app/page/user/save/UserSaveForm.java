@@ -8,6 +8,7 @@ public class UserSaveForm extends BaseActionForm {
 	private Long userId;
 	private String username;
 	private String password;
+	private String email;
 	private Long countryId;
 	private Long cityId;
 
@@ -77,6 +78,14 @@ public class UserSaveForm extends BaseActionForm {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

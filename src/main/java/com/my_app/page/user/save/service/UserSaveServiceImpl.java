@@ -71,6 +71,14 @@ public class UserSaveServiceImpl implements UserSaveService {
 			}
 		}
 
+		if (StringUtils.isBlank(form.getEmail())) {
+			isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("error.common.required"));
+		} else if (!form.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+			isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("error.common.invalid"));
+		}
+
 		return isValid;
 	}
 

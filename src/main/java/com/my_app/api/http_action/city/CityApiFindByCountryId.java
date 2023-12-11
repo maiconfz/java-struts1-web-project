@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.google.gson.Gson;
+
 import com.my_app.model.City;
 import com.my_app.service.CityService;
 import com.my_app.service.factory.CityServiceFactory;
