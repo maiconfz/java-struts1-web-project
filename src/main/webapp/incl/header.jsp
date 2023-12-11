@@ -17,6 +17,10 @@
                             <li><a href="${contextPath}/page-layout/with-sidebar.jsp">With sidebar</a></li>
                             <li><a href="${contextPath}/page-layout/full-width-fluid.jsp">Full-width fluid</a></li>
                         </ul></li>
+                     <li><a href="${contextPath}/page-layout/publicPage.jsp">Public Page</a></li>
+                     <c:if test="${isLoggedIn eq true}">
+                        <li><a href="${contextPath}/page-layout/privatePage.jsp">Private Page</a></li>
+                    </c:if>
                     <c:if test="${isLoggedIn eq true}">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -27,7 +31,7 @@
                             <c:when test="${isLoggedIn eq true}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, ${username} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="${contextPath}">Logout</a></li>
+                                    <li><a href="${contextPath}/logout.do">Logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>
