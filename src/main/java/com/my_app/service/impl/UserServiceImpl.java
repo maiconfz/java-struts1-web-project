@@ -6,10 +6,19 @@ import com.my_app.model.User;
 import com.my_app.repo.UserRepository;
 import com.my_app.service.UserService;
 
+/**
+ * The UserServiceImpl class implements the UserService interface and provides
+ * the implementation for CRUD operations related to the User entity.
+ */
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
+	/**
+     * Constructs a UserServiceImpl with the specified UserRepository.
+     *
+     * @param userRepository The UserRepository to be used for database operations.
+     */
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
@@ -28,6 +37,12 @@ public class UserServiceImpl implements UserService {
 	public User findByUsername(String username) {
 		return this.userRepository.findByUsername(username);
 	}
+	
+	@Override
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+	}
+
 
 	@Override
 	public List<User> findAll() {

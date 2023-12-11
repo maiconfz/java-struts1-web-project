@@ -11,10 +11,19 @@ import com.my_app.exception.AppGenericException;
 import com.my_app.model.Country;
 import com.my_app.repo.CountryRepository;
 
+/**
+ * The CountryRepositoryImpl class provides an implementation for the CountryRepository interface.
+ * It performs CRUD operations for Country entities using JDBC and SQL.
+ */
 public class CountryRepositoryImpl implements CountryRepository {
 
 	private final Connection conn;
 
+	/**
+     * Constructs a CountryRepositoryImpl with the given database connection.
+     *
+     * @param conn The database connection.
+     */
 	public CountryRepositoryImpl(Connection conn) {
 		super();
 		this.conn = conn;

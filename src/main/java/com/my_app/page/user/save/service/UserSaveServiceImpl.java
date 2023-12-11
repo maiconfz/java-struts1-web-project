@@ -14,12 +14,29 @@ import com.my_app.service.CountryService;
 import com.my_app.service.UserService;
 import com.my_app.utils.UserUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * The UserSaveServiceImpl class implements the UserSaveService interface
+ * to provide user save-related functionality, including form initialization,
+ * validation, user saving, and setting request attributes.
+ */
 public class UserSaveServiceImpl implements UserSaveService {
 
+	/*Field Instances for managing user-related, country-related, city-related operations.*/
 	final UserService userService;
 	final CountryService countryService;
 	final CityService cityService;
 
+	/**
+     * Constructs a UserSaveServiceImpl with the specified UserService, CountryService,
+     * and CityService instances.
+     *
+     * @param userService    The UserService instance.
+     * @param countryService The CountryService instance.
+     * @param cityService    The CityService instance.
+     */
 	public UserSaveServiceImpl(UserService userService, CountryService countryService, CityService cityService) {
 		super();
 		this.userService = userService;
@@ -27,6 +44,11 @@ public class UserSaveServiceImpl implements UserSaveService {
 		this.cityService = cityService;
 	}
 
+	/**
+     * Initializes the user save form based on the existing user details if it's not a new user.
+     *
+     * @param form The UserSaveForm to be initialized.
+     */
 	@Override
 	public void formInit(UserSaveForm form) {
 		if (!form.isNewUser()) {
@@ -37,6 +59,12 @@ public class UserSaveServiceImpl implements UserSaveService {
 		}
 	}
 
+	/**
+     * Validates the user save form, checking for required fields and uniqueness constraints.
+     *
+     * @param form The UserSaveForm to be validated.
+     * @return True if the form is valid; otherwise, false.
+     */
 	@Override
 	public boolean validate(UserSaveForm form) {
 		boolean isValid = true;
@@ -55,6 +83,20 @@ public class UserSaveServiceImpl implements UserSaveService {
 			isValid = false;
 			form.getActionErrors().add("password", new ActionMessage("error.common.required"));
 		}
+		
+		if (StringUtils.isBlank(form.getEmail())) {
+            isValid = false;
+            form.getActionErrors().add("email", new ActionMessage("error.common.required"));
+        } else {
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            Pattern pattern = Pattern.compile(emailRegex);
+            Matcher matcher = pattern.matcher(form.getEmail());
+
+            if (!matcher.matches()) {
+                isValid = false;
+                form.getActionErrors().add("email", new ActionMessage("error.email.invalid"));
+            }
+        }
 
 		if (form.getCountryId() == null || form.getCountryId() == 0) {
 			isValid = false;
@@ -74,11 +116,23 @@ public class UserSaveServiceImpl implements UserSaveService {
 		return isValid;
 	}
 
+	 /**
+     * Saves the user based on the provided user save form.
+     *
+     * @param form The UserSaveForm containing user details.
+     * @return The saved User entity.
+     */
 	@Override
 	public User saveUser(UserSaveForm form) {
 		return this.userService.save(new UserSaveFormToUserMapper().toUser(form));
 	}
 
+	/**
+     * Sets request attributes needed for rendering the user save form.
+     *
+     * @param form The UserSaveForm.
+     * @param req  The HttpServletRequest.
+     */
 	@Override
 	public void setRequestAttrs(UserSaveForm form, HttpServletRequest req) {
 		req.setAttribute("countries", this.countryService.findAll());

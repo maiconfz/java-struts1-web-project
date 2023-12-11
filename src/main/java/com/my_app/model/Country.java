@@ -1,9 +1,16 @@
 package com.my_app.model;
 
+/**
+ * Represents a country with an identifier and name.
+ */
 public class Country {
+	
+	/*Fields*/
 	private Long id;
 	private String name;
 
+	
+	/*Constructors*/
 	public Country() {
 	}
 
@@ -18,6 +25,8 @@ public class Country {
 		this.name = name;
 	}
 
+	
+	/*Getters & Setters*/
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +43,7 @@ public class Country {
 		this.name = name;
 	}
 
+	/*ToString*/
 	@Override
 	public String toString() {
 		return String.format("Country [id=%s, name=%s]", id, name);

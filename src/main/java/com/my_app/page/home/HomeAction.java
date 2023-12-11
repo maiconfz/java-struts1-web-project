@@ -12,6 +12,18 @@ import com.my_app.utils.LoginUtils;
 
 public class HomeAction extends Action {
 
+	/**
+	 * Executes the home action, redirecting to the home page if the user is logged in,
+	 * otherwise redirects to the login page.
+	 * 
+	 * @param mapping     The ActionMapping used to select this instance.
+	 * @param actionForm  The optional ActionForm bean for this request (not used in this method).
+	 * @param req         The HttpServletRequest object.
+	 * @param res         The HttpServletResponse object.
+	 * @return            The ActionForward for the next view based on the user's login status.
+	 * @throws Exception  If an error occurs during execution.
+	 */
+	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {

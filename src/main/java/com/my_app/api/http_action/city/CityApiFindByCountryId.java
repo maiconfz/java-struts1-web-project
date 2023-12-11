@@ -19,7 +19,21 @@ import com.my_app.model.City;
 import com.my_app.service.CityService;
 import com.my_app.service.factory.CityServiceFactory;
 
+/*A class to handle HTTP requests related to retrieving
+ *  a list of cities based on a specified country ID.
+ */
 public class CityApiFindByCountryId extends Action {
+	
+	/**
+	 * Executes the action to find and retrieve cities based on the provided country ID.
+	 * 
+	 * @param mapping   The ActionMapping used to select this instance.
+	 * @param form      The ActionForm being processed.
+	 * @param req       The HttpServletRequest object.
+	 * @param res       The HttpServletResponse object.
+	 * @return          Always returns null as the response is directly written to the HttpServletResponse.
+	 * @throws Exception If an error occurs during the execution.
+	 */
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest req,

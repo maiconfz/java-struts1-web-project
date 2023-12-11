@@ -7,10 +7,19 @@ import com.my_app.model.Country;
 import com.my_app.repo.CityRepository;
 import com.my_app.service.CityService;
 
+/**
+ * The CityServiceImpl class implements the CityService interface and provides
+ * the implementation for CRUD operations related to the City entity.
+ */
 public class CityServiceImpl implements CityService {
 
 	private final CityRepository cityRepository;
 
+	/**
+     * Constructs a CityServiceImpl with the specified CityRepository.
+     *
+     * @param cityRepository The CityRepository to be used for database operations.
+     */
 	public CityServiceImpl(CityRepository cityRepository) {
 		super();
 		this.cityRepository = cityRepository;

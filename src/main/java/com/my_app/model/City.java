@@ -1,11 +1,18 @@
 package com.my_app.model;
 
+/**
+ * Represents a city with an identifier, name, and associated country.
+ */
 public class City {
+	
+	/*Fields*/
 	private Long id;
 	private String name;
 
 	private Country country;
 
+	
+	/*Constructors*/
 	public City() {
 	}
 
@@ -27,6 +34,8 @@ public class City {
 		this.country = country;
 	}
 
+	
+	/*Getters & Setters*/
 	public Long getId() {
 		return id;
 	}
@@ -50,7 +59,9 @@ public class City {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
+	
+	
+	/*ToString*/
 	@Override
 	public String toString() {
 		return String.format("City [id=%s, name=%s, country=%s]", id, name, country);
