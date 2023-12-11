@@ -12,6 +12,7 @@
 <title>Companies - MyApp</title>
 <jsp:include page="/incl/styles.jsp" />
 </head>
+
 <body>
     <jsp:include page="/incl/header.jsp" />
     <main class="container">
