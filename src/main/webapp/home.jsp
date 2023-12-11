@@ -22,6 +22,9 @@
                 <a class="btn btn-default btn-lg" href="${contextPath}/users.do" title="Go to users management area" style="font-size: 6rem"> <i class="fa fa-users" aria-hidden="true"></i><br />
                 <span style="font-size: 0.75em;">Users</span>
                 </a>
+                <a class="btn btn-default btn-lg" href="${contextPath}/companies.do" title="Go to companies management area" style="font-size: 6rem"> <i class="fa fa-users" aria-hidden="true"></i><br />
+                <span style="font-size: 0.75em;">Companies</span>
+                </a>
             </div>
         </div>
     </main>

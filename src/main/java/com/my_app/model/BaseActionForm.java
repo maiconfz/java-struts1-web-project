@@ -5,12 +5,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMessages;
 
 public class BaseActionForm extends ActionForm {
+	
 	private static final long serialVersionUID = -790204658587517103L;
 
+	/*Fields*/
 	private String action;
 	private ActionMessages actionMessages = new ActionMessages();
 	private ActionErrors actionErrors = new ActionErrors();
 
+	
+	/*Getters & Setters*/
 	public String getAction() {
 		return action;
 	}

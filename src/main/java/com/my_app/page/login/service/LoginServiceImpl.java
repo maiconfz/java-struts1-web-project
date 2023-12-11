@@ -9,7 +9,7 @@ import com.my_app.service.UserService;
 public class LoginServiceImpl implements LoginService {
 
 	final UserService userService;
-
+	
 	public LoginServiceImpl(UserService userService) {
 		this.userService = userService;
 	}

@@ -14,8 +14,13 @@ import com.my_app.service.CountryService;
 import com.my_app.service.UserService;
 import com.my_app.utils.UserUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
 public class UserSaveServiceImpl implements UserSaveService {
 
+	/*Field Instances for managing user-related, country-related, city-related operations.*/
 	final UserService userService;
 	final CountryService countryService;
 	final CityService cityService;
@@ -55,6 +60,20 @@ public class UserSaveServiceImpl implements UserSaveService {
 			isValid = false;
 			form.getActionErrors().add("password", new ActionMessage("error.common.required"));
 		}
+		
+		if (StringUtils.isBlank(form.getEmail())) {
+            isValid = false;
+            form.getActionErrors().add("email", new ActionMessage("error.common.required"));
+        } else {
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            Pattern pattern = Pattern.compile(emailRegex);
+            Matcher matcher = pattern.matcher(form.getEmail());
+
+            if (!matcher.matches()) {
+                isValid = false;
+                form.getActionErrors().add("email", new ActionMessage("error.email.invalid"));
+            }
+        }
 
 		if (form.getCountryId() == null || form.getCountryId() == 0) {
 			isValid = false;

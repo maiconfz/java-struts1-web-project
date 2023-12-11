@@ -10,6 +10,7 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
+
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
@@ -28,6 +29,12 @@ public class UserServiceImpl implements UserService {
 	public User findByUsername(String username) {
 		return this.userRepository.findByUsername(username);
 	}
+	
+	@Override
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+	}
+
 
 	@Override
 	public List<User> findAll() {

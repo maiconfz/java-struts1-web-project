@@ -26,20 +26,21 @@ public class LoginAction extends Action {
 		final LoginForm form = (LoginForm) actionForm;
 
 		req.setAttribute("form", form);
-
+		
 		if (LoginUtils.isUserLoggedIn(req.getSession())) {
 			return mapping.findForward("actionHomeRedir");
-		} else if ("submit".equals(form.getAction())) {
+		}  else if ("submit".equals(form.getAction())) {
 			return performSubmit(mapping, form, req, res, loginService);
 		} else {
 			return this.performLogin(mapping, form, req, res);
 		}
 	}
-
+	
 	private ActionForward performLogin(ActionMapping mapping, LoginForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) {
 		return mapping.findForward("loginPage");
 	}
+	
 
 	private ActionForward performSubmit(ActionMapping mapping, LoginForm form, HttpServletRequest req,
 			HttpServletResponse res, LoginService loginService) {

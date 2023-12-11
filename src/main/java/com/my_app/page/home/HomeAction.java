@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import com.my_app.utils.LoginUtils;
 
 public class HomeAction extends Action {
-
+	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {

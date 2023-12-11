@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.h2.jdbcx.JdbcDataSource;
 
 public class DataSourceFactory {
-
+	
 	public DataSource create() {
 		final JdbcDataSource ds = new JdbcDataSource();
 

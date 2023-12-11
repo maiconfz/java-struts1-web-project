@@ -10,6 +10,10 @@
                 <a class="navbar-brand" href="${contextPath}/">MyApp</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+            	<a class="navbar-brand" href="${contextPath}/publicPage.jsp">Public Page</a>
+            	 <c:if test="${isLoggedIn eq true}">
+            	 	<a class="navbar-brand" href="${contextPath}/privatePage.jsp">Private Page</a>
+            	 </c:if>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Page Layouts<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -27,7 +31,7 @@
                             <c:when test="${isLoggedIn eq true}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, ${username} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="${contextPath}">Logout</a></li>
+                                    <li><a href="${contextPath}/logout.do" >Logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>

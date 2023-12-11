@@ -5,9 +5,12 @@ import com.my_app.model.BaseActionForm;
 public class LoginForm extends BaseActionForm {
 	private static final long serialVersionUID = 3648004327226250285L;
 
+	/*Fields*/
 	private String username;
 	private String password;
 
+	/*Getters & Setters*/
+	
 	public String getUsername() {
 		return username;
 	}
