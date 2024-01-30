@@ -12,14 +12,22 @@
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
         <forward name="actionUsers" path="/users.do"></forward>
-        <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
+        <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>        
     </global-forwards>
 
     <action-mappings>
         <action path="/home" type="com.my_app.page.home.HomeAction" scope="request" input="/home.jsp">
             <forward name="homePage" path="/home.jsp" />
         </action>
+        
+        <action path="/last" type="com.my_app.page.last.LastAction" scope="request" input="/last.jsp">
+            <forward name="last" path="/last.jsp" />
+        </action>
 
+        <action path="/logout" type="com.my_app.page.login.LogoutAction" scope="request" input="/logout.jsp">
+            <forward name="logout" path="/logout.jsp" />
+        </action>
+        
         <action name="loginForm" path="/login" type="com.my_app.page.login.LoginAction" scope="request" input="/login.jsp">
             <forward name="loginPage" path="/login.jsp" />
         </action>
@@ -30,7 +38,21 @@
         </action>
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
         
+  
+        <action path="/companies" type="com.my_app.page.company.list.CompanyListAction" scope="request" input="/company/list.jsp"></action>
+        <action path="/company/save" type="com.my_app.page.company.save.CompanySaveAction" name="companySaveForm" scope="request" input="/company/save/form.jsp">
+            <forward name="form" path="/company/save/form.jsp" />
+        </action>
+   
+   
+   <!--  
+        <action path="/company/company-delete" type="com.my_app.page.company.delete.CompanyDeleteAction" scope="request"></action>
+   -->
+    
+  
         <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>
+        
+     
     </action-mappings>
 
     <message-resources parameter="MessageResources" null="false"></message-resources>
