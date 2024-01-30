@@ -49,6 +49,7 @@
                         <hr />
 
                         <a href="#">Create account</a>
+                        
                     </form>
                 </div>
             </div>

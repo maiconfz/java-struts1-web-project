@@ -15,12 +15,15 @@ import org.tinylog.Logger;
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.City;
+import com.my_app.model.Company;
 import com.my_app.model.Country;
 import com.my_app.model.User;
 import com.my_app.repo.CityRepository;
+import com.my_app.repo.CompanyRepository;
 import com.my_app.repo.CountryRepository;
 import com.my_app.repo.UserRepository;
 import com.my_app.repo.impl.CityRepositoryImpl;
+import com.my_app.repo.impl.CompanyRepositoryImpl;
 import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
 
@@ -81,6 +84,7 @@ public class App {
 		try (final Connection conn = this.dataSource.getConnection()) {
 			initDbCountriesAndCities(conn);
 			initDbUsers(conn);
+			initDbCompany(conn);
 		} catch (SQLException e) {
 			throw new AppGenericException("Error trying to insert initial db data", e);
 		}
@@ -115,20 +119,58 @@ public class App {
 	private void initDbUsers(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
-					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, EMAIL VARCHAR(255) UNIQUE NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
 		}
 
 		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
 		final UserRepository userRepository = new UserRepositoryImpl(conn, cityRepository);
 
-		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1)));
+		userRepository.save(new User("admin", "admin", "admin@gmail.com", cityRepository.findById((long) this.random.nextInt(49) + 1)));
 
 		for (int i = 1; i < 11; i++) {
 			userRepository.save(
-					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+					new User("user" + i, "user" + i, "user_" + i + "@hotmail.com" , cityRepository.findById((long) this.random.nextInt(49) + 1)));
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());
 	}
+	
+	private void initDbCompany(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE \"COMPANY\" (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, ADDRESS VARCHAR(255) UNIQUE NOT NULL, IVA INTEGER NOT NULL, COUNTRY_ID BIGINT UNIQUE NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID), FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+		}
 
+		final CountryRepository countryRepository = new CountryRepositoryImpl(conn);
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, countryRepository);		
+		final CompanyRepository companyRepository = new CompanyRepositoryImpl(conn, countryRepository, cityRepository);
+
+		companyRepository.save(new Company("Coca Cola","Av das industrias, 15, Bairro industrial", 8 ,countryRepository.findById((1L)),cityRepository.findById((1L)) ));
+		companyRepository.save(new Company("Amazon", "Rua Principal, 20, Bairro Comercial", 5 ,countryRepository.findById((2L)),cityRepository.findById((3L)) ));
+		
+		Logger.debug("All companies created: {}", companyRepository.findAll());
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
