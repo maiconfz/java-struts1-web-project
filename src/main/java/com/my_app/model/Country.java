@@ -11,6 +11,11 @@ public class Country {
 		super();
 		this.name = name;
 	}
+	
+	public Country(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Country(Long id, String name) {
 		super();
