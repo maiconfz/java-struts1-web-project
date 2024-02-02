@@ -23,6 +23,8 @@
         <action name="loginForm" path="/login" type="com.my_app.page.login.LoginAction" scope="request" input="/login.jsp">
             <forward name="loginPage" path="/login.jsp" />
         </action>
+        
+        <action name="logoutPage" path="/logout" type="com.my_app.page.logout.LogoutAction" scope="request"></action>
 
         <action path="/users" type="com.my_app.page.user.list.UserListAction" scope="request" input="/user/list.jsp"></action>
         <action name="userSaveForm" path="/user/save" type="com.my_app.page.user.save.UserSaveAction" scope="request" input="/user/save/form.jsp">
