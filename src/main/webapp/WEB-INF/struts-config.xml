@@ -6,6 +6,7 @@
     <form-beans>
         <form-bean name="loginForm" type="com.my_app.page.login.LoginForm"></form-bean>
         <form-bean name="userSaveForm" type="com.my_app.page.user.save.UserSaveForm"></form-bean>
+        <form-bean name="companySaveForm" type="com.my_app.page.company.save.CompanySaveForm"></form-bean>
     </form-beans>
 
     <global-forwards>
@@ -13,6 +14,8 @@
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
         <forward name="actionUsers" path="/users.do"></forward>
         <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
+        <forward name="actionCompanies" path="/companies.do"></forward>
+        <forward name="actionCompaniesRedir" path="/companies.do" redirect="true"></forward>
     </global-forwards>
 
     <action-mappings>
@@ -31,6 +34,12 @@
             <forward name="form" path="/user/save/form.jsp" />
         </action>
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
+        
+        <action path="/companies" type="com.my_app.page.company.list.CompanyListAction" scope="request" input="/company/list.jsp"></action>
+        <action name="companySaveForm" path="/company/save" type="com.my_app.page.company.save.CompanySaveAction" scope="request" input="/company/save/form.jsp">
+            <forward name="form" path="/company/save/form.jsp" />
+        </action>
+        <action path="/company/company/delete" type="com.my_app.page.company.delete.CompanyDeleteAction" scope="request"></action>
         
         <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>
     </action-mappings>
