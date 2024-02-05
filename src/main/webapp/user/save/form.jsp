@@ -34,7 +34,7 @@
         </c:choose>
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <form id="user-save-fome" action="${contextPath}/user/save.do" method="POST">
+                <form id="user-save-form" action="${contextPath}/user/save.do" method="POST">
                     <input type="hidden" name="action" value="submit" />
                     <input type="hidden" name="formInit" value="${form.formInit}" />
                     <input type="hidden" id="user-id" name="userId" value="${form.userId}" />
@@ -79,6 +79,14 @@
                         </select>
                         <div class="help-block">
                             <html:errors property="city" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group ${actionErrors.get('email').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
+                        <label for="user-email">Email</label>
+                        <input id="user-email" type="email" class="form-control" name="email" value="${form.email}" placeholder="Email" aria-label="Email" required />
+                        <div class="help-block">
+                            <html:errors property="email" />
                         </div>
                     </div>
 

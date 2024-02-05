@@ -3,7 +3,7 @@
  */
 
 let form = {
-    $form: $('form#user-save-fome'),
+    $form: $('form#user-save-form'),
     $action: $('input[name="action"]'),
 
     user: {
@@ -11,7 +11,8 @@ let form = {
         $username: $('input#user-username'),
         $password: $('input#user-password'),
         $country: $('select#user-country'),
-        $city: $('select#user-city')
+        $city: $('select#user-city'),
+        $email: $('input#user-email'),
     },
 
     btn: {
