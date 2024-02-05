@@ -70,6 +70,22 @@ public class UserSaveServiceImpl implements UserSaveService {
 				form.getActionErrors().add("city", new ActionMessage("error.common.required"));
 			}
 		}
+		
+		
+		// validação do novo atributo email, solicitado no exercicio 5
+		
+		if ((StringUtils.isBlank(form.getEmail())) || (form.getEmail() == null)) {
+			isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("error.common.required"));
+			
+		} else if(! UserUtils.validaEmailTopLevel(form.getEmail())) {
+			isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("user.mail.invalid"));
+			
+			
+		}
+		
+		
 
 		return isValid;
 	}

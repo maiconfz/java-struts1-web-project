@@ -15,6 +15,7 @@ public class UserToUserSaveFormMapper {
 		form.setUsername(user.getUsername());
 		form.setCountryId(user.getCity().getCountry().getId());
 		form.setCityId(user.getCity().getId());
+		form.setEmail(user.getEmail());
 
 		return form;
 	}

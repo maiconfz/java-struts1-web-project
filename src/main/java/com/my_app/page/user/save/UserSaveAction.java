@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.tinylog.Logger;
 
 import com.my_app.model.User;
 import com.my_app.page.user.save.service.UserSaveService;
@@ -27,20 +28,28 @@ public class UserSaveAction extends Action {
 		final UserSaveForm form = (UserSaveForm) actionForm;
 
 		req.setAttribute("form", form);
+		
+		Logger.debug("entrou no action usersave execute");
 
 		if (LoginUtils.isUserNotLoggedIn(req.getSession())) {
+			Logger.debug("entrou no action usersave login");
 			return mapping.findForward("loginRedir");
 		} else if ("save".equals(form.getAction())) {
+			Logger.debug("entrou no action usersave save");
 			return executeSaveAction(mapping, form, req, res, userSaveService);
 		} else if ("validate".equals(form.getAction())) {
+			Logger.debug("entrou no action usersave validate");
 			return executeValidateAction(mapping, form, req, res, userSaveService);
 		} else {
+			Logger.debug("entrou no action usersave form");
 			return this.executeFormAction(mapping, form, req, res, userSaveService);
 		}
 	}
 
 	private ActionForward executeFormAction(ActionMapping mapping, UserSaveForm form, HttpServletRequest req,
 			HttpServletResponse res, UserSaveService userSaveService) {
+		
+		Logger.debug("entrou no action usersave executeFormAction");
 
 		if (form.isFormInit()) {
 			userSaveService.formInit(form);
