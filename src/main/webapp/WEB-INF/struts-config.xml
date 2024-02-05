@@ -6,18 +6,24 @@
     <form-beans>
         <form-bean name="loginForm" type="com.my_app.page.login.LoginForm"></form-bean>
         <form-bean name="userSaveForm" type="com.my_app.page.user.save.UserSaveForm"></form-bean>
+         <form-bean name="companySaveForm" type="com.my_app.page.company.save.CompanySaveForm"></form-bean>
     </form-beans>
 
     <global-forwards>
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
         <forward name="actionUsers" path="/users.do"></forward>
+          <forward name="actionCompanies" path="/companies.do"></forward>
         <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
+      <!--    <forward name="actionCompaniesRedir" path="/companies.do" redirect="true"></forward> -->
+	
+         <!-- <forward name="actionLogoutRedir" path="/logout.do" redirect="true"></forward> -->
     </global-forwards>
 
     <action-mappings>
+       
         <action path="/home" type="com.my_app.page.home.HomeAction" scope="request" input="/home.jsp">
-            <forward name="homePage" path="/home.jsp" />
+  		   <forward name="homePage" path="/home.jsp"/>
         </action>
 
         <action name="loginForm" path="/login" type="com.my_app.page.login.LoginAction" scope="request" input="/login.jsp">
@@ -31,6 +37,37 @@
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
         
         <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>
+               
+        <!-- public  -->
+         <action path="/public" forward="/public.jsp" type="com.my_app.page.util.ActionPublic" scope="request" >
+    			    <forward name="publicPage" path="/public.jsp" /> 
+		</action>
+		
+		 <!-- private   -->
+         <action path="/private" forward="/private.jsp" type="com.my_app.page.util.ActionPrivate" scope="request" >
+    			    <forward name="privatePage" path="/private.jsp" /> 
+		</action>
+        
+        
+        <!-- logout -->
+        <action path="/logout" forward="logout.jsp" type="com.my_app.page.logout.ActionLogout" scope="request" >
+    			    <forward name="logoutPage" path="/logout.jsp" /> 
+        </action>
+        
+        <!-- companies -->
+        <action path="/companies" type="com.my_app.page.company.list.CompanyrListAction" scope="request" input="/company/list.jsp">
+        <!-- <forward name="listcompanies" path="/company/list.jsp" />  -->
+        </action>
+        
+        <action name="companySaveForm" path="/company/save" type="com.my_app.page.company.save.CompanySaveAction" scope="request" input="/company/save/formcompany.jsp">
+            <forward name="formcompany" path="/company/save/formcompany.jsp" />
+        </action>
+        
+        <action path="/company/company-delete" type="com.my_app.page.company.delete.CompanyDeleteAction" scope="request"></action>
+        
+        
+        
+        
     </action-mappings>
 
     <message-resources parameter="MessageResources" null="false"></message-resources>
