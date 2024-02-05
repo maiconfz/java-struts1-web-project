@@ -15,16 +15,29 @@ import org.tinylog.Logger;
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.City;
+import com.my_app.model.Company;
 import com.my_app.model.Country;
 import com.my_app.model.User;
 import com.my_app.repo.CityRepository;
 import com.my_app.repo.CountryRepository;
 import com.my_app.repo.UserRepository;
+import com.my_app.repo.CompanyRepository;
 import com.my_app.repo.impl.CityRepositoryImpl;
 import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
+import com.my_app.repo.impl.CompanyRepositoryImpl;
 
 public class App {
+
+	private static final String CREATE_STATEMENT = ""
+			+ "CREATE TABLE \"COMPANY\" ("
+			+ "		ID IDENTITY NOT NULL PRIMARY KEY, "
+			+ "		NAME VARCHAR(255) NOT NULL, "
+			+ "		ADDRESS VARCHAR(255) NOT NULL, "
+			+ "		VAT VARCHAR(255), "
+			+ "		CITY_ID BIGINT NOT NULL, "
+			+ "		FOREIGN KEY (CITY_ID) REFERENCES CITY(ID)"
+			+ ")";
 
 	private static App instance;
 
@@ -81,9 +94,26 @@ public class App {
 		try (final Connection conn = this.dataSource.getConnection()) {
 			initDbCountriesAndCities(conn);
 			initDbUsers(conn);
+			initDbCompanies(conn);
 		} catch (SQLException e) {
 			throw new AppGenericException("Error trying to insert initial db data", e);
 		}
+	}
+
+	private void initDbCompanies(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(CREATE_STATEMENT);
+		}
+
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
+		final CompanyRepository companyRepository = new CompanyRepositoryImpl(conn, cityRepository);
+
+		for (int i = 1; i < 11; i++) {
+			companyRepository.save(
+					new Company("company" + i, "Street " + i, "vat" + i, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+		}
+
+		Logger.debug("All companies created: {}", companyRepository.findAll());
 	}
 
 	private void initDbCountriesAndCities(Connection conn) throws SQLException {
@@ -115,17 +145,17 @@ public class App {
 	private void initDbUsers(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
-					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, EMAIL VARCHAR(255), FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
 		}
 
 		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
 		final UserRepository userRepository = new UserRepositoryImpl(conn, cityRepository);
 
-		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1)));
+		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1), "admin@example.com"));
 
 		for (int i = 1; i < 11; i++) {
 			userRepository.save(
-					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1), "user" + i + "@example.com"));
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());

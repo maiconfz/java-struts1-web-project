@@ -18,9 +18,14 @@
         <h2>Welcome to MyApp</h2>
         <h3>Choose an area</h3>
         <div class="row">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-6 text-center">
                 <a class="btn btn-default btn-lg" href="${contextPath}/users.do" title="Go to users management area" style="font-size: 6rem"> <i class="fa fa-users" aria-hidden="true"></i><br />
                 <span style="font-size: 0.75em;">Users</span>
+                </a>
+            </div>
+            <div class="col-xs-6 text-center">
+                <a class="btn btn-default btn-lg" href="${contextPath}/companies.do" title="Go to companies management area" style="font-size: 6rem"> <i class="fa fa-tree" aria-hidden="true"></i><br />
+                <span style="font-size: 0.75em;">Companies</span>
                 </a>
             </div>
         </div>
