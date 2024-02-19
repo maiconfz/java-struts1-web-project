@@ -24,6 +24,14 @@
             <forward name="loginPage" path="/login.jsp" />
         </action>
 
+        <action path="/public" type="com.my_app.page.publicstatic.PublicStaticAction" scope="request" input="/public.jsp">
+            <forward name="publicPage" path="/public.jsp" />
+        </action>
+
+        <action path="/private" type="com.my_app.page.privatestatic.PrivateStaticAction" scope="request" input="/private.jsp">
+            <forward name="privatePage" path="/private.jsp" />
+        </action>
+
         <action path="/users" type="com.my_app.page.user.list.UserListAction" scope="request" input="/user/list.jsp"></action>
         <action name="userSaveForm" path="/user/save" type="com.my_app.page.user.save.UserSaveAction" scope="request" input="/user/save/form.jsp">
             <forward name="form" path="/user/save/form.jsp" />
