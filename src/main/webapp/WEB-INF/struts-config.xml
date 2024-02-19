@@ -32,6 +32,9 @@
             <forward name="privatePage" path="/private.jsp" />
         </action>
 
+        <action path="/logout" type="com.my_app.page.login.LogoutAction" scope="request"/>
+
+
         <action path="/users" type="com.my_app.page.user.list.UserListAction" scope="request" input="/user/list.jsp"></action>
         <action name="userSaveForm" path="/user/save" type="com.my_app.page.user.save.UserSaveAction" scope="request" input="/user/save/form.jsp">
             <forward name="form" path="/user/save/form.jsp" />

@@ -34,7 +34,7 @@
                             <c:when test="${isLoggedIn eq true}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, ${username} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="${contextPath}">Logout</a></li>
+                                    <li><a href="${contextPath}/logout.do">Logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>
