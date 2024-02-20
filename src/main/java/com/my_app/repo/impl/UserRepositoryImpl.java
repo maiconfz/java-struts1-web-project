@@ -11,7 +11,7 @@ import com.my_app.exception.AppGenericException;
 import com.my_app.model.User;
 import com.my_app.repo.CityRepository;
 import com.my_app.repo.UserRepository;
-import com.my_app.utils.UserUtils;
+import com.my_app.utils.StringUtils;
 
 public class UserRepositoryImpl implements UserRepository {
 
@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD, CITY_ID, EMAIL) VALUES (?, ?, ?, ?)")) {
 
-			stmt.setString(1, UserUtils.normalizeUsername(user.getUsername()));
+			stmt.setString(1, StringUtils.normalizeString(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 			stmt.setLong(3, user.getCity().getId());
 			stmt.setString(4, user.getEmail());
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("UPDATE \"USER\" SET USERNAME = ?, PASSWORD = ?, CITY_ID = ?, EMAIL = ? WHERE ID = ?")) {
 
-			stmt.setString(1, UserUtils.normalizeUsername(user.getUsername()));
+			stmt.setString(1, StringUtils.normalizeString(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 			stmt.setLong(3, user.getCity().getId());
 			stmt.setString(4, user.getEmail());
@@ -93,7 +93,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID, EMAIL FROM \"USER\" WHERE USERNAME = ?")) {
 
-			stmt.setString(1, UserUtils.normalizeUsername(username));
+			stmt.setString(1, StringUtils.normalizeString(username));
 
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {

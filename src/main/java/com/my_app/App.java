@@ -10,6 +10,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.my_app.model.Company;
+import com.my_app.repo.CompanyRepository;
+import com.my_app.repo.impl.CompanyRepositoryImpl;
 import org.tinylog.Logger;
 
 import com.my_app.db.DataSourceFactory;
@@ -79,8 +82,10 @@ public class App {
 	private void initDb() {
 
 		try (final Connection conn = this.dataSource.getConnection()) {
+			conn.createStatement().execute("DROP ALL OBJECTS");
 			initDbCountriesAndCities(conn);
 			initDbUsers(conn);
+			initDbCompanies(conn);
 		} catch (SQLException e) {
 			throw new AppGenericException("Error trying to insert initial db data", e);
 		}
@@ -129,6 +134,23 @@ public class App {
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());
+	}
+
+	private void initDbCompanies(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE \"COMPANIES\" (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, ADDRESS VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, VAT VARCHAR(15) NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+		}
+
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
+		final CompanyRepository companyRepository = new CompanyRepositoryImpl(conn, cityRepository);
+
+		for (int i = 1; i < 11; i++) {
+			companyRepository.save(
+					new Company("company" + i, "Street " + i, cityRepository.findById((long) this.random.nextInt(49) + 1),String.valueOf(i)));
+		}
+
+		Logger.debug("All companies created: {}", companyRepository.findAll());
 	}
 
 }

@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 import static org.apache.commons.lang3.StringUtils.replace;
 
-public class UserUtils {
+public class StringUtils {
 
-	private UserUtils() {
+	private StringUtils() {
 	}
 
-	public static String normalizeUsername(String username) {
-		return replace(lowerCase(username), " ", "_");
+	public static String normalizeString(String stringToNormalize) {
+		return replace(lowerCase(stringToNormalize), " ", "_");
 	}
 
     public static boolean emailValidator(String email) {

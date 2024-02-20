@@ -28,6 +28,7 @@
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="${contextPath}/users.do">Users</a></li>
+                                <li><a href="${contextPath}/companies.do">Companies</a></li>
                             </ul></li>
                     </c:if>
                     <li class="${isLoggedIn eq true ? 'dropdown' : ''}"><c:choose>
