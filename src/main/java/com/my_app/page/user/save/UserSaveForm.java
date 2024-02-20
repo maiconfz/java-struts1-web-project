@@ -10,6 +10,7 @@ public class UserSaveForm extends BaseActionForm {
 	private String password;
 	private Long countryId;
 	private Long cityId;
+	private String email;
 
 	private String originalUsername;
 
@@ -61,6 +62,14 @@ public class UserSaveForm extends BaseActionForm {
 
 	public void setOriginalUsername(String originalUsername) {
 		this.originalUsername = originalUsername;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean isFormInit() {

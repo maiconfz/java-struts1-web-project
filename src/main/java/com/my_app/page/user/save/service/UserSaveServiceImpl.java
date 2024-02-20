@@ -2,7 +2,6 @@ package com.my_app.page.user.save.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionMessage;
 
 import com.my_app.model.User;
@@ -12,7 +11,7 @@ import com.my_app.page.user.save.mapper.UserToUserSaveFormMapper;
 import com.my_app.service.CityService;
 import com.my_app.service.CountryService;
 import com.my_app.service.UserService;
-import com.my_app.utils.UserUtils;
+import com.my_app.utils.StringUtils;
 
 public class UserSaveServiceImpl implements UserSaveService {
 
@@ -41,17 +40,17 @@ public class UserSaveServiceImpl implements UserSaveService {
 	public boolean validate(UserSaveForm form) {
 		boolean isValid = true;
 
-		if (StringUtils.isBlank(form.getUsername())) {
+		if (org.apache.commons.lang3.StringUtils.isBlank(form.getUsername())) {
 			isValid = false;
 			form.getActionErrors().add("username", new ActionMessage("error.common.required"));
 		} else if ((form.isNewUser() || (!form.isNewUser()
-				&& !form.getOriginalUsername().equals(UserUtils.normalizeUsername(form.getUsername()))))
+				&& !form.getOriginalUsername().equals(StringUtils.normalizeString(form.getUsername()))))
 				&& userService.findByUsername(form.getUsername()) != null) {
 			isValid = false;
 			form.getActionErrors().add("username", new ActionMessage("user.username-taken.error"));
 		}
 
-		if (StringUtils.isBlank(form.getPassword())) {
+		if (org.apache.commons.lang3.StringUtils.isBlank(form.getPassword())) {
 			isValid = false;
 			form.getActionErrors().add("password", new ActionMessage("error.common.required"));
 		}
@@ -70,6 +69,14 @@ public class UserSaveServiceImpl implements UserSaveService {
 				form.getActionErrors().add("city", new ActionMessage("error.common.required"));
 			}
 		}
+
+		if (org.apache.commons.lang3.StringUtils.isBlank(form.getEmail())) {
+			isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("error.common.required"));
+		} else if (!StringUtils.emailValidator(form.getEmail())) {
+            isValid = false;
+			form.getActionErrors().add("email", new ActionMessage("error.email.wrong"));
+        }
 
 		return isValid;
 	}
