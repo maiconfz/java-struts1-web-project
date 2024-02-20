@@ -11,7 +11,8 @@ let form = {
         $username: $('input#user-username'),
         $password: $('input#user-password'),
         $country: $('select#user-country'),
-        $city: $('select#user-city')
+        $city: $('select#user-city'),
+        $email: $('select#user-email')
     },
 
     btn: {

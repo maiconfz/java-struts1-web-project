@@ -115,17 +115,17 @@ public class App {
 	private void initDbUsers(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
-					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+					"CREATE TABLE \"USER\" (ID IDENTITY NOT NULL PRIMARY KEY, USERNAME VARCHAR(255) UNIQUE NOT NULL, PASSWORD VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, EMAIL VARCHAR(255) NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
 		}
 
 		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
 		final UserRepository userRepository = new UserRepositoryImpl(conn, cityRepository);
 
-		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1)));
+		userRepository.save(new User("admin", "admin", cityRepository.findById((long) this.random.nextInt(49) + 1),"admin@myapp.com"));
 
 		for (int i = 1; i < 11; i++) {
 			userRepository.save(
-					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+					new User("user" + i, "user" + i, cityRepository.findById((long) this.random.nextInt(49) + 1),"user" + i + "@myapp.com"));
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());

@@ -82,6 +82,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group ${actionErrors.get('email').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
+                        <label for="user-email">Email</label>
+                        <input id="user-email" type="text" class="form-control" name="email" value="${form.email}" placeholder="Email" aria-label="Email" maxlength="100" required />
+                        <div class="help-block">
+                            <html:errors property="email" />
+                        </div>
+                    </div>
+
                     <a class="btn btn-default" href="${contextPath}/users.do">Back</a>
                     <button type="submit" class="btn btn-default btn-validate">Validate</button>
                     <button type="submit" class="btn btn-success btn-save">Save</button>

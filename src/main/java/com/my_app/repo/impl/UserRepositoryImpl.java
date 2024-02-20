@@ -35,11 +35,12 @@ public class UserRepositoryImpl implements UserRepository {
 
 	private User create(User user) {
 		try (final PreparedStatement stmt = this.conn
-				.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD, CITY_ID) VALUES (?, ?, ?)")) {
+				.prepareStatement("INSERT INTO \"USER\" (USERNAME, PASSWORD, CITY_ID, EMAIL) VALUES (?, ?, ?, ?)")) {
 
 			stmt.setString(1, UserUtils.normalizeUsername(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 			stmt.setLong(3, user.getCity().getId());
+			stmt.setString(4, user.getEmail());
 
 			stmt.executeUpdate();
 
@@ -51,12 +52,13 @@ public class UserRepositoryImpl implements UserRepository {
 
 	private User update(User user) {
 		try (final PreparedStatement stmt = this.conn
-				.prepareStatement("UPDATE \"USER\" SET USERNAME = ?, PASSWORD = ?, CITY_ID = ? WHERE ID = ?")) {
+				.prepareStatement("UPDATE \"USER\" SET USERNAME = ?, PASSWORD = ?, CITY_ID = ?, EMAIL = ? WHERE ID = ?")) {
 
 			stmt.setString(1, UserUtils.normalizeUsername(user.getUsername()));
 			stmt.setString(2, user.getPassword());
 			stmt.setLong(3, user.getCity().getId());
-			stmt.setLong(4, user.getId());
+			stmt.setString(4, user.getEmail());
+			stmt.setLong(5, user.getId());
 
 			stmt.executeUpdate();
 
@@ -69,14 +71,14 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User findById(Long id) {
 		try (final PreparedStatement stmt = this.conn
-				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID FROM \"USER\" WHERE ID = ?")) {
+				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID, EMAIL FROM \"USER\" WHERE ID = ?")) {
 
 			stmt.setLong(1, id);
 
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					return new User(rs.getLong(1), rs.getString(2), rs.getString(3),
-							this.cityRepository.findById(rs.getLong(4)));
+							this.cityRepository.findById(rs.getLong(4)),rs.getString(5));
 				}
 			}
 
@@ -89,14 +91,14 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User findByUsername(String username) {
 		try (final PreparedStatement stmt = this.conn
-				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID FROM \"USER\" WHERE USERNAME = ?")) {
+				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID, EMAIL FROM \"USER\" WHERE USERNAME = ?")) {
 
 			stmt.setString(1, UserUtils.normalizeUsername(username));
 
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					return new User(rs.getLong(1), rs.getString(2), rs.getString(3),
-							this.cityRepository.findById(rs.getLong(4)));
+							this.cityRepository.findById(rs.getLong(4)),rs.getString(5));
 				}
 			}
 
@@ -109,14 +111,14 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public List<User> findAll() {
 		try (final PreparedStatement stmt = this.conn
-				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID FROM \"USER\"");
+				.prepareStatement("SELECT ID, USERNAME, PASSWORD, CITY_ID, EMAIL FROM \"USER\"");
 				final ResultSet rs = stmt.executeQuery()) {
 
 			final List<User> users = new LinkedList<>();
 
 			while (rs.next()) {
 				users.add(new User(rs.getLong(1), rs.getString(2), rs.getString(3),
-						this.cityRepository.findById(rs.getLong(4))));
+						this.cityRepository.findById(rs.getLong(4)),rs.getString(5)));
 			}
 
 			return users;
