@@ -3,18 +3,16 @@
  */
 
 let form = {
-    $form: $('form#user-save-fome'),
+    $form: $('form#company-save-fome'),
     $action: $('input[name="action"]'),
 
-    user: {
-        $id: $('input#user-id'),
-        $username: $('input#user-username'),
-        $password: $('input#user-password'),
-        $country: $('select#user-country'),
-        $city: $('select#user-city'),
-        $email: $('input#user-email'),
-
-
+    company: {
+        $id: $('input#company-id'),
+        $name: $('input#company-name'),
+        $address: $('input#company-address'),
+        $vatNumber: $('input#company-vatNumber'),
+        $country: $('select#company-country'),
+        $city: $('select#company-city')
     },
 
     btn: {
@@ -40,8 +38,8 @@ let btnSaveClickHandler = (event) => {
 }
 
 let countryChangeHandler = () => {
-    let $country = form.user.$country;
-    let $city = form.user.$city;
+    let $country = form.company.$country;
+    let $city = form.company.$city;
 
     $city.prop('disabled', true).val('').empty().append($(`<option value="" hidden>Choose a city</option>`));
 
@@ -66,7 +64,7 @@ let main = () => {
     form.btn.$validate.on('click', btnValidateClickHandler);
     form.btn.$save.on('click', btnSaveClickHandler);
 
-    form.user.$country.on('change', countryChangeHandler)
+    form.company.$country.on('change', countryChangeHandler)
 
     console.debug('form.js initialized');
 }

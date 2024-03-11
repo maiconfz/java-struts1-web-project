@@ -21,13 +21,20 @@
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="${contextPath}/users.do">Users</a></li>
+                                 <li><a href="${contextPath}/companies.do">Companies</a></li>
+                                
                             </ul></li>
                     </c:if>
+                          <li><a href="${contextPath}/publicPage.jsp">PagePublic</a></li>
+                    
+                      <c:if test="${isLoggedIn eq true}">
+                         <li><a href="${contextPath}/privatePage.jsp">Private Page</a></li>
+                       </c:if>
                     <li class="${isLoggedIn eq true ? 'dropdown' : ''}"><c:choose>
                             <c:when test="${isLoggedIn eq true}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, ${username} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="${contextPath}">Logout</a></li>
+                                    <li><a href="${contextPath}/logout.do">Logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>
