@@ -60,6 +60,7 @@ let countryChangeHandler = () => {
 }
 
 let main = () => {
+	
 
     form.btn.$validate.on('click', btnValidateClickHandler);
     form.btn.$save.on('click', btnSaveClickHandler);

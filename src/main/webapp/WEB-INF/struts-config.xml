@@ -14,6 +14,8 @@
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
         <forward name="actionUsers" path="/users.do"></forward>
         <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
+        
+        <forward name="actionCompanies" path="/companies.do"></forward>
     </global-forwards>
 
     <action-mappings>

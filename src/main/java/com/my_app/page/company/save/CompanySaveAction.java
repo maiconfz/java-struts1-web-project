@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.my_app.model.Company;
+import com.my_app.model.User;
 import com.my_app.page.company.save.service.CompanySaveService;
 import com.my_app.page.company.save.service.CompanySaveServiceFactory;
 import com.my_app.utils.LoginUtils;
@@ -74,8 +76,40 @@ public class CompanySaveAction extends Action {
 
 	private ActionForward executeSaveAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,
 			HttpServletResponse res, CompanySaveService companySaveService) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		
+		ActionForward actionForward;
+
+		if (companySaveService.validate(form)) {
+			final Company company = companySaveService.saveCompany(form);
+
+			if (form.isNewCompany()) {
+				form.getActionMessages().add("topMsgs", new ActionMessage("company.create.success", company.getName()));
+			} else {
+				form.getActionMessages().add("topMsgs", new ActionMessage("company.update.success", company.getName()));
+			}
+
+			actionForward = mapping.findForward("actionCompanies");
+		} else {
+			form.getActionErrors().add("topMsgs", new ActionMessage("form.validation.error"));
+			req.setAttribute("validated", true);
+
+			actionForward = this.executeFormAction(mapping, form, req, res, companySaveService);
+		}
+
+		if (!form.getActionMessages().isEmpty()) {
+			req.setAttribute("actionMessages", form.getActionMessages());
+			this.saveMessages(req, form.getActionMessages());
+		} else if (!form.getActionErrors().isEmpty()) {
+			req.setAttribute("actionErrors", form.getActionErrors());
+			this.saveErrors(req, form.getActionErrors());
+		}
+
+		return actionForward;
+		
+		
+		
 	}
 
 }

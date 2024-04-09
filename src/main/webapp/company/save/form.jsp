@@ -65,7 +65,7 @@
 
                     <div class="form-group ${actionErrors.get('country').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="company-country">Country</label>
-                        <select class="form-control" id="user-country" name="countryId" required>
+                        <select class="form-control" id="company-country" name="countryId" required>
                             <option value="" hidden>Choose a country</option>
                             <c:forEach var="country" items="${countries}">
                                 <option value="${country.id}" ${form.countryId eq country.id ? 'selected' : ''}>${country.name}</option>
@@ -78,7 +78,7 @@
 
                     <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="company-city">City</label>
-                        <select class="form-control" id="user-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
+                        <select class="form-control" id="company-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
                             <option value="" hidden>Choose a city</option>
                             <c:forEach var="city" items="${cities}">
                                 <option value="${city.id}" ${form.cityId eq city.id ? 'selected' : ''}>${city.name}</option>

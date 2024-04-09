@@ -69,6 +69,10 @@ public class Company {
 		return address;
 	}
 	
+	public boolean isNew() {
+		return this.id == null;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Company [id=%s, name=%s,address=%s, vat=%s, city=%s ]", id, name, address, vat, city);

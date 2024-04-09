@@ -16,8 +16,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Company save(Company o) {
-		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.save(o);
 	}
 
 	@Override
@@ -28,8 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<Company> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.findAll();
 	}
 
 	@Override
