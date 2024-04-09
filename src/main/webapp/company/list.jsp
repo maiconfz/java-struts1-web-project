@@ -35,19 +35,40 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Address</th>
                     <th>Country</th>
                     <th>City</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-              <tr><td>${companies}</td></tr>
+            	<tbody>
+	                <c:choose>
+	                    <c:when test="${empty companies}">
+	                        <tr>
+	                            <td colspan="5">List of companies is empty!</td>
+	                        </tr>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <c:forEach items="${companies}" var="company">
+	                            <tr>
+	                                <td>${company.name}</td>
+	                                <td>${company.address}</td>
+	                                <td>${company.city.country.name}</td>
+	                                <td>${company.city.name}</td>
+	                                <td class="text-right">
+	                                    <div class="btn-group" role="group" aria-label="...">
+	                                    <a>TODO Edit</a>
+	                                    <a>TODO Delete</a>
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                        </c:forEach>
+	                    </c:otherwise>
+	                </c:choose>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="${contextPath}/campony/save.do" title="Create new company">New</a>
+        <a class="btn btn-primary" href="${contextPath}/company/save.do" title="Create new company">New</a>
     </main>
     <!-- /container -->
     <jsp:include page="/incl/footer.jsp" />

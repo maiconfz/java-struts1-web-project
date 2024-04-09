@@ -1,5 +1,7 @@
 package com.my_app.page.company.list;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.my_app.service.CompanyService;
+import com.my_app.service.UserService;
+import com.my_app.service.factory.CompanyServiceFactory;
+import com.my_app.service.factory.UserServiceFactory;
 import com.my_app.utils.LoginUtils;
 
 public class CompanyListAction extends Action {
@@ -20,7 +26,9 @@ public class CompanyListAction extends Action {
 			return mapping.findForward("actionLoginRedir");
 		}
 		
-		req.setAttribute("companies", "Page Companies");
+		final CompanyService companyService = new CompanyServiceFactory().create((Connection) req.getAttribute("conn"));
+		
+		req.setAttribute("companies", companyService.findAll());
 
 		return mapping.getInputForward();
 	}
