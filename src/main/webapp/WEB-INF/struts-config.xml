@@ -30,6 +30,14 @@
         </action>
         <action path="/user/user-delete" type="com.my_app.page.user.delete.UserDeleteAction" scope="request"></action>
         
+        
+        <action path="/companies" type="com.my_app.page.company.list.CompanyListAction" scope="request" input="/company/list.jsp"></action>
+        <action name="companySaveForm" path="/company/save" type="com.my_app.page.company.save.CompanySaveAction" scope="request" input="/company/save/form.jsp">
+            <forward name="form" path="/company/save/form.jsp" />
+        </action>
+        
+        
+        
         <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>
     </action-mappings>
 
