@@ -6,6 +6,7 @@
     <form-beans>
         <form-bean name="loginForm" type="com.my_app.page.login.LoginForm"></form-bean>
         <form-bean name="userSaveForm" type="com.my_app.page.user.save.UserSaveForm"></form-bean>
+        <form-bean name="companySaveForm" type="com.my_app.page.company.save.CompanySaveForm"></form-bean>
     </form-beans>
 
     <global-forwards>

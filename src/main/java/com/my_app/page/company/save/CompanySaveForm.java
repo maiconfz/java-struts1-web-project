@@ -8,13 +8,14 @@ public class CompanySaveForm extends BaseActionForm {
 	
 	private Long companyId;
 	private String name;
+	private String address;
 	private Long vat;
 	private Long cityId;
 	private Long countryId;
 	
 	private transient boolean formInit = true;
 
-	public Long getComapnyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
@@ -62,7 +63,15 @@ public class CompanySaveForm extends BaseActionForm {
 		this.formInit = formInit;
 	}
 	
-	
+	public boolean isNewCompany() {
+		return this.companyId == null || this.companyId == 0;
+	}
 
+	public String getAddress() {
+		return address;
+	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }

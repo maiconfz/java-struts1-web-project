@@ -4,6 +4,7 @@ public class Company {
 
 	private Long id;
 	private String name;
+	private String address;
 	private Long vat;
 	private City city;
 	
@@ -11,16 +12,18 @@ public class Company {
 		super();
 	}
 	
-	public Company(String name, Long vat, City city) {
+	public Company(String name, String address, Long vat, City city) {
 		super();
 		this.name = name;
 		this.vat = vat;
 		this.city = city;
+		this.address = address;
 	}
-	public Company(Long id, String name, Long vat, City city) {
+	public Company(Long id, String name, String address, Long vat, City city) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.address = address;
 		this.vat = vat;
 		this.city = city;
 	}
@@ -58,8 +61,17 @@ public class Company {
 		this.city = city;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+	
+	public String setAddress(String address) {
+		return address;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("Company [id=%s, name=%s, vat=%s, city=%s ]", id, name, vat, city);
+		return String.format("Company [id=%s, name=%s,address=%s, vat=%s, city=%s ]", id, name, address, vat, city);
 	}
+
 }

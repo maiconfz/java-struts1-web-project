@@ -41,8 +41,12 @@ public class CompanySaveAction extends Action {
 
 	private ActionForward executeFormAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,
 			HttpServletResponse res, CompanySaveService companySaveService) {
-		// TODO Auto-generated method stub
-		return null;
+		if (form.isFormInit()) {
+			companySaveService.formInit(form);
+			form.setFormInit(false);
+		}
+		companySaveService.setRequestAttrs(form, req);
+		return mapping.findForward("form");
 	}
 
 	private ActionForward executeValidateAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,

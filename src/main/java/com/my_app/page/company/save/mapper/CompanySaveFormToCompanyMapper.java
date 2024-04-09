@@ -10,7 +10,7 @@ public class CompanySaveFormToCompanyMapper {
 		
 		final City city = new City(form.getCityId());
 		
-		return new Company(Long.valueOf(0).equals(form.getComapnyId()) ? null : form.getComapnyId(), form.getName(),
+		return new Company(Long.valueOf(0).equals(form.getCompanyId()) ? null : form.getCompanyId(), form.getName(), form.getAddress(),
 				form.getVat(), city);
 	}
 }
