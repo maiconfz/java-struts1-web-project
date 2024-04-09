@@ -34,7 +34,7 @@
         </c:choose>
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <form id="user-save-fome" action="${contextPath}/company/save.do" method="POST">
+                <form id="company-save-fome" action="${contextPath}/company/save.do" method="POST">
                     <input type="hidden" name="action" value="submit" />
                     <input type="hidden" name="formInit" value="${form.formInit}" />
                     <input type="hidden" id="company-id" name="companyId" value="${form.companyId}" />
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="form-group ${actionErrors.get('country').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-country">Country</label>
+                        <label for="company-country">Country</label>
                         <select class="form-control" id="user-country" name="countryId" required>
                             <option value="" hidden>Choose a country</option>
                             <c:forEach var="country" items="${countries}">
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="form-group ${actionErrors.get('city').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
-                        <label for="user-city">City</label>
+                        <label for="company-city">City</label>
                         <select class="form-control" id="user-city" name="cityId" required ${(form.countryId eq null or form.countryId eq 0) ? 'disabled' : ''}>
                             <option value="" hidden>Choose a city</option>
                             <c:forEach var="city" items="${cities}">
