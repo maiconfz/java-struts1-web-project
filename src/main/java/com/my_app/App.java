@@ -81,6 +81,7 @@ public class App {
 		try (final Connection conn = this.dataSource.getConnection()) {
 			initDbCountriesAndCities(conn);
 			initDbUsers(conn);
+			createDbCompanies(conn);
 		} catch (SQLException e) {
 			throw new AppGenericException("Error trying to insert initial db data", e);
 		}
@@ -129,6 +130,13 @@ public class App {
 		}
 
 		Logger.debug("All users created: {}", userRepository.findAll());
+	}
+	
+	private void createDbCompanies(Connection conn) throws SQLException {
+		try (final Statement stmt = conn.createStatement()) {
+			stmt.executeUpdate(
+					"CREATE TABLE \"COMPANY\" (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, ADDRESS VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, VAT BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+		}
 	}
 
 }
