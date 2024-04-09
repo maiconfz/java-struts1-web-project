@@ -9,6 +9,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 import com.my_app.page.company.save.service.CompanySaveService;
 import com.my_app.page.company.save.service.CompanySaveServiceFactory;
@@ -51,8 +52,24 @@ public class CompanySaveAction extends Action {
 
 	private ActionForward executeValidateAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,
 			HttpServletResponse res, CompanySaveService companySaveService) {
-		// TODO Auto-generated method stub
-		return null;
+
+		if (companySaveService.validate(form)) {
+			form.getActionMessages().add("topMsgs", new ActionMessage("form.validation.success", form.getName()));
+		} else {
+			form.getActionErrors().add("topMsgs", new ActionMessage("form.validation.error"));
+		}
+
+		if (!form.getActionMessages().isEmpty()) {
+			req.setAttribute("actionMessages", form.getActionMessages());
+			this.saveMessages(req, form.getActionMessages());
+		} else if (!form.getActionErrors().isEmpty()) {
+			req.setAttribute("actionErrors", form.getActionErrors());
+			this.saveErrors(req, form.getActionErrors());
+		}
+
+		req.setAttribute("validated", true);
+
+		return this.executeFormAction(mapping, form, req, res, companySaveService);
 	}
 
 	private ActionForward executeSaveAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,

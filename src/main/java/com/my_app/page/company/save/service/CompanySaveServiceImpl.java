@@ -2,11 +2,14 @@ package com.my_app.page.company.save.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts.action.ActionMessage;
+
 import com.my_app.model.Company;
 import com.my_app.page.company.save.CompanySaveForm;
 import com.my_app.service.CityService;
-import com.my_app.service.CountryService;
 import com.my_app.service.CompanyService;
+import com.my_app.service.CountryService;
 
 public class CompanySaveServiceImpl implements CompanySaveService {
 	
@@ -24,8 +27,39 @@ public class CompanySaveServiceImpl implements CompanySaveService {
 
 	@Override
 	public boolean validate(CompanySaveForm form) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isValid = true;
+
+		if (StringUtils.isBlank(form.getName())) {
+			isValid = false;
+			form.getActionErrors().add("name", new ActionMessage("error.common.required"));
+		} 
+
+		if (StringUtils.isBlank(form.getAddress())) {
+			isValid = false;
+			form.getActionErrors().add("address", new ActionMessage("error.common.required"));
+		}
+		
+		if (form.getVat() == null || form.getVat() == 0) {
+			isValid = false;
+			form.getActionErrors().add("vat", new ActionMessage("error.common.required"));
+		}
+
+		if (form.getCountryId() == null || form.getCountryId() == 0) {
+			isValid = false;
+			form.getActionErrors().add("country", new ActionMessage("error.common.required"));
+		}
+
+		if (form.getCityId() == null || form.getCityId() == 0) {
+			isValid = false;
+
+			if (form.getCountryId() == null || form.getCountryId() == 0) {
+				form.getActionErrors().add("city", new ActionMessage("form.field.pre-choose", "Country"));
+			} else {
+				form.getActionErrors().add("city", new ActionMessage("error.common.required"));
+			}
+		}
+		
+		return isValid;
 	}
 
 	@Override
