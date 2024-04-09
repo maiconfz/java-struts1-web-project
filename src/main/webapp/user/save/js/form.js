@@ -9,6 +9,7 @@ let form = {
     user: {
         $id: $('input#user-id'),
         $username: $('input#user-username'),
+        $email: $('input#user-email'),
         $password: $('input#user-password'),
         $country: $('select#user-country'),
         $city: $('select#user-city')

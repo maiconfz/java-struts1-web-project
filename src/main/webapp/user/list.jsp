@@ -37,6 +37,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Username</th>
+                    <th>Email</th>
                     <th>Country</th>
                     <th>City</th>
                     <th class="text-right">Actions</th>
@@ -54,6 +55,7 @@
                             <tr>
                                 <td>${user.id}</td>
                                 <td>${user.username}</td>
+                                <td>${user.email}</td>
                                 <td>${user.city.country.name}</td>
                                 <td>${user.city.name}</td>
                                 <td class="text-right">

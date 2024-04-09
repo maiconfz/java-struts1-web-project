@@ -47,6 +47,14 @@
                             <html:errors property="username" />
                         </div>
                     </div>
+                    
+                    <div class="form-group ${actionErrors.get('email').hasNext() ? 'has-error' : (validated ? 'has-success' : '')}">
+                        <label for="user-email">Email</label>
+                        <input id="user-email" type="text" class="form-control" name="email" value="${form.email}" placeholder="Email" aria-label="Email" maxlength="100" required />
+                        <div class="help-block">
+                            <html:errors property="email" />
+                        </div>
+                    </div>
 
                     <div class="form-group ${actionErrors.get('password').hasNext() ? 'has-error' :  (validated ? 'has-success' : '')}">
                         <label for="user-password">Password</label>
