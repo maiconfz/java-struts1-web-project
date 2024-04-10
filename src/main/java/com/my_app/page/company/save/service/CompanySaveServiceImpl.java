@@ -6,9 +6,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionMessage;
 
 import com.my_app.model.Company;
+import com.my_app.model.User;
 import com.my_app.page.company.save.CompanySaveForm;
 import com.my_app.page.company.save.mapper.CompanySaveFormToCompanyMapper;
+import com.my_app.page.company.save.mapper.CompanyToCompanySaveFormMapper;
 import com.my_app.page.user.save.mapper.UserSaveFormToUserMapper;
+import com.my_app.page.user.save.mapper.UserToUserSaveFormMapper;
 import com.my_app.service.CityService;
 import com.my_app.service.CompanyService;
 import com.my_app.service.CountryService;
@@ -71,7 +74,12 @@ public class CompanySaveServiceImpl implements CompanySaveService {
 
 	@Override
 	public void formInit(CompanySaveForm form) {
-		// TODO Auto-generated method stub
+
+		if (!form.isNewCompany()) {
+			final Company company = this.companyService.findById(form.getCompanyId());
+			new CompanyToCompanySaveFormMapper().mapTo(company, form);
+			form.setName(form.getName());
+		}
 		
 	}
 
