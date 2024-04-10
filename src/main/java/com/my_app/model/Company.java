@@ -15,9 +15,9 @@ public class Company {
 	public Company(String name, String address, Long vat, City city) {
 		super();
 		this.name = name;
+		this.address = address;
 		this.vat = vat;
 		this.city = city;
-		this.address = address;
 	}
 	public Company(Long id, String name, String address, Long vat, City city) {
 		super();

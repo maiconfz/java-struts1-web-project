@@ -46,6 +46,8 @@
             <forward name="form" path="/company/save/form.jsp" />
         </action>
         
+        <action path="/company/company-delete" type="com.my_app.page.company.delete.CompanyDeleteAction" scope="request"></action>
+        
         <action path="/logout" type="com.my_app.page.logout.LogoutAction" scope="request"></action>
         
         <action path="/api/city/by-country" type="com.my_app.api.http_action.city.CityApiFindByCountryId" scope="request"></action>

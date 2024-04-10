@@ -15,12 +15,15 @@ import org.tinylog.Logger;
 import com.my_app.db.DataSourceFactory;
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.City;
+import com.my_app.model.Company;
 import com.my_app.model.Country;
 import com.my_app.model.User;
 import com.my_app.repo.CityRepository;
+import com.my_app.repo.CompanyRepository;
 import com.my_app.repo.CountryRepository;
 import com.my_app.repo.UserRepository;
 import com.my_app.repo.impl.CityRepositoryImpl;
+import com.my_app.repo.impl.CompanyRepositoryImpl;
 import com.my_app.repo.impl.CountryRepositoryImpl;
 import com.my_app.repo.impl.UserRepositoryImpl;
 
@@ -135,8 +138,19 @@ public class App {
 	private void createDbCompanies(Connection conn) throws SQLException {
 		try (final Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate(
-					"CREATE TABLE \"COMPANY\" (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, ADDRESS VARCHAR(255) NOT NULL, CITY_ID BIGINT NOT NULL, VAT BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
+					"CREATE TABLE \"COMPANY\" (ID IDENTITY NOT NULL PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL, ADDRESS VARCHAR(255) NOT NULL, VAT BIGINT NOT NULL, CITY_ID BIGINT NOT NULL, FOREIGN KEY (CITY_ID) REFERENCES CITY(ID))");
 		}
+		
+		final CityRepository cityRepository = new CityRepositoryImpl(conn, new CountryRepositoryImpl(conn));
+		final CompanyRepository companyRepository = new CompanyRepositoryImpl(conn, cityRepository);
+		
+		for (int i = 1; i < 5; i++) {
+			companyRepository.save(
+					new Company("company_name" + i, "address_company" + i, this.random.nextLong(49) + 1, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+		}
+
+		Logger.debug("All comapny created: {}", companyRepository.findAll());
+		
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.my_app.exception.AppGenericException;
 import com.my_app.model.Company;
+import com.my_app.model.User;
 import com.my_app.repo.CityRepository;
 import com.my_app.repo.CompanyRepository;
 import com.my_app.utils.CompanyUtils;
@@ -66,8 +67,18 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 
 	@Override
 	public Company findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try (final PreparedStatement stmt = this.conn.prepareStatement("SELECT ID, NAME, ADDRESS, VAT, CITY_ID FROM \"COMPANY\" WHERE ID = ?")) {
+			stmt.setLong(1, id);
+			try (final ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					return new Company(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getLong(4), this.cityRepository.findById(rs.getLong(5)));
+				}
+			}
+
+			return null;
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while querying by id for Company", e);
+		}
 	}
 
 	@Override
@@ -86,14 +97,19 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 	
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		
+		try (final PreparedStatement stmt = this.conn.prepareStatement("DELETE \"COMPANY\" WHERE ID = ?")) {
+			stmt.setLong(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new AppGenericException("Error while deleting for Company", e);
+		}
 		
 	}
 
 	@Override
 	public void delete(Company o) {
-		// TODO Auto-generated method stub
-		
+		this.deleteById(o.getId());
 	}
 
 	@Override

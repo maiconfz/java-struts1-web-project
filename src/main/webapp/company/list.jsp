@@ -58,8 +58,12 @@
 	                                <td>${company.city.name}</td>
 	                                <td class="text-right">
 	                                    <div class="btn-group" role="group" aria-label="...">
-	                                    <a>TODO Edit</a>
-	                                    <a>TODO Delete</a>
+	                                    	<a href="${contextPath}/company/save.do?companyId=${company.id}" class="btn btn-sm btn-default" title='Edit company "${company.name}"'>
+	                                    		<i class="fa fa-pencil" aria-hidden="true"></i>
+	                                    	</a>
+	                                    	<a href="${contextPath}/company/company-delete.do?companyId=${company.id}" class="btn btn-sm btn-danger" title='Delete company "${company.name}"'>
+	                                    		<i class="fa fa-times" aria-hidden="true"></i>
+	                                    	</a>
 	                                    </div>
 	                                </td>
 	                            </tr>

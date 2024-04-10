@@ -21,8 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Company findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.findById(id);
 	}
 
 	@Override
@@ -32,14 +31,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
+		companyRepository.deleteById(id);
 	}
 
 	@Override
 	public void delete(Company o) {
-		// TODO Auto-generated method stub
-		
+		companyRepository.delete(o);
 	}
 
 }
