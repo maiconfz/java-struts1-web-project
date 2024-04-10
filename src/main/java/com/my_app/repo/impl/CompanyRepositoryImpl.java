@@ -53,7 +53,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 	
 	private Company update(Company company) {
 		try (final PreparedStatement stmt = this.conn.prepareStatement("UPDATE \"COMPANY\" SET NAME = ?, ADDRESS = ?, CITY_ID = ?, VAT = ? WHERE ID = ?")) {
-			stmt.setString(1, CompanyUtils.normalizeName(company.getName()));
+			stmt.setString(1, company.getName());
 			stmt.setString(2, company.getAddress());
 			stmt.setLong(3, company.getCity().getId());
 			stmt.setLong(4, company.getVat());

@@ -77,8 +77,6 @@ public class CompanySaveAction extends Action {
 	private ActionForward executeSaveAction(ActionMapping mapping, CompanySaveForm form, HttpServletRequest req,
 			HttpServletResponse res, CompanySaveService companySaveService) {
 		
-		
-		
 		ActionForward actionForward;
 
 		if (companySaveService.validate(form)) {
