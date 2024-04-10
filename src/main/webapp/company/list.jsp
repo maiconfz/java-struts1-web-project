@@ -37,6 +37,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Address</th>
+                    <th>Vat</th>
                     <th>Country</th>
                     <th>City</th>
                     <th class="text-right">Actions</th>
@@ -54,6 +55,7 @@
 	                            <tr>
 	                                <td>${company.name}</td>
 	                                <td>${company.address}</td>
+	                                <td>${company.vat}</td>
 	                                <td>${company.city.country.name}</td>
 	                                <td>${company.city.name}</td>
 	                                <td class="text-right">

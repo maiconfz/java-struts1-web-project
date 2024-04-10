@@ -146,7 +146,7 @@ public class App {
 		
 		for (int i = 1; i < 5; i++) {
 			companyRepository.save(
-					new Company("company_name" + i, "address_company" + i, this.random.nextLong(49) + 1, cityRepository.findById((long) this.random.nextInt(49) + 1)));
+					new Company("company_name" + i, "address_company" + i, 1 + this.random.nextLong(49) + 1, cityRepository.findById((long) this.random.nextInt(49) + 1)));
 		}
 
 		Logger.debug("All comapny created: {}", companyRepository.findAll());

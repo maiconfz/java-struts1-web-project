@@ -38,7 +38,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 		try (final PreparedStatement stmt = this.conn
 				.prepareStatement("INSERT INTO \"COMPANY\" (NAME, ADDRESS, CITY_ID, VAT) VALUES (?, ?, ?, ?)")) {
 
-			stmt.setString(1, CompanyUtils.normalizeName(company.getName()));
+			stmt.setString(1, company.getName());
 			stmt.setString(2, company.getAddress());
 			stmt.setLong(3, company.getCity().getId());
 			stmt.setLong(4, company.getVat());
@@ -115,7 +115,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 	@Override
 	public Company findByName(String name) {
 		try (final PreparedStatement stmt = this.conn.prepareStatement("SELECT ID, NAME, ADDRESS, VAT, CITY_ID FROM \"COMPANY\" WHERE NAME = ?")) {
-			stmt.setString(1, CompanyUtils.normalizeName(name));
+			stmt.setString(1, name);
 			try (final ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					return new Company(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getLong(4),this.cityRepository.findById(rs.getLong(5)));

@@ -9,6 +9,7 @@ public class CompanyToCompanySaveFormMapper {
 		
 		form.setCompanyId(company.getId());
 		form.setName(company.getName());
+		form.setAddress(company.getAddress());		
 		form.setCityId(company.getCity().getId());
 		form.setVat(company.getVat());
 		form.setCountryId(company.getCity().getCountry().getId());
