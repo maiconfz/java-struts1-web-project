@@ -16,6 +16,9 @@
                             <li><a href="${contextPath}/page-layout/default.jsp">Default</a></li>
                             <li><a href="${contextPath}/page-layout/with-sidebar.jsp">With sidebar</a></li>
                             <li><a href="${contextPath}/page-layout/full-width-fluid.jsp">Full-width fluid</a></li>
+                            
+                            <li><a href="${contextPath}/publicPage.do">Public Page</a></li>
+                            <li><a href="${contextPath}/privatePage.do">Private Page</a></li>
                         </ul></li>
                     <c:if test="${isLoggedIn eq true}">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>

@@ -13,14 +13,21 @@
         <forward name="actionLoginRedir" path="/login.do" redirect="true"></forward>
         <forward name="actionHomeRedir" path="/home.do" redirect="true"></forward>
         <forward name="actionUsers" path="/users.do"></forward>
-        <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>
-        
+        <forward name="actionUsersRedir" path="/users.do" redirect="true"></forward>        
         <forward name="actionCompanies" path="/companies.do"></forward>
     </global-forwards>
 
     <action-mappings>
         <action path="/home" type="com.my_app.page.home.HomeAction" scope="request" input="/home.jsp">
             <forward name="homePage" path="/home.jsp" />
+        </action>
+            
+        <action path="/publicPage" type="com.my_app.page.publicPage.PublicPageAction" scope="request" input="/publicPage.jsp">
+            <forward name="publicPage" path="/publicPage.jsp" />
+        </action>
+        
+        <action path="/privatePage" type="com.my_app.page.privatePage.PrivatePageAction" scope="request" input="/privatePage.jsp">
+            <forward name="privatePage" path="/privatePage.jsp" />
         </action>
 
         <action name="loginForm" path="/login" type="com.my_app.page.login.LoginAction" scope="request" input="/login.jsp">
